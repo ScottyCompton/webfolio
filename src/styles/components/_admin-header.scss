@@ -1,0 +1,23 @@
+.header {
+    width: 100%;
+    margin-bottom: 2rem;
+    height: 10vh;
+    max-height: 75px;
+    position: relative;
+    float: left;
+}
+
+.header__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__title {
+    text-decoration: none;
+    color: white;
+    h1 {
+        margin: 0;
+    }
+}
