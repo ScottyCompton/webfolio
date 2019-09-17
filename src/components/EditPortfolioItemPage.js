@@ -32,7 +32,8 @@ export class EditPortfolioItemPage extends React.Component {
 
     render() {
         return (
-            this.props. dataLoaded && <PortfolioEditForm portfolioItem={this.props.portfolioItem} onSubmit={this.onSubmit} />
+            this.props. dataLoaded && 
+            <PortfolioEditForm portfolioItem={this.props.portfolioItem} onSubmit={this.onSubmit} />
         )
             
     }

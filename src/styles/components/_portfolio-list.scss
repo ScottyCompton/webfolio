@@ -1,0 +1,46 @@
+.portfolio-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.portfolio-list__list-item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.portfolio-list__list-item-title {
+    width: 50%;
+}
+
+.portfolio-list__list-item-cats {
+    width: 20%;
+}
+
+.portfolio-list__list-item>* {
+    align-self: center;
+}
+
+.portfolio-list__list-item:nth-child(odd) {
+    background-color: darken($gray-400, 5%);
+}
+
+.portfolio-list__list-item-img {
+    width: 10%;
+    max-width: 100px;
+    height: 100px;
+}
+
+.portfolio-list__list-item-img img {
+    width: 100px;
+    height: 100px;
+}
+
+.portfolio-list__list-item-btns {
+    .btn-danger {
+        margin-left: 10px;
+    }
+}

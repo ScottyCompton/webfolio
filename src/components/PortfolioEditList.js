@@ -1,25 +1,62 @@
 import React from 'react';
 import uuid from 'uuid';
-import { Link } from 'react-router-dom';
+import {Container, Row, Col, Button} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { startRemovePortfolioItem } from '../actions/portfolio-items';
+import PortfolioEditListItem from './PortfolioEditListItem';
 
-const PortfolioEditList = (props) => (
-    <div className="container">
-        <div className="jumbotron bg-dark">
 
-            {props.portfolio.map((item) => {
-                return (
-                    <div key={uuid()} style={{display: "flex"}}>
-                        <div><img src={item.previewImg} style={{width: "100px"}} /></div>
-                        <div>
-                            <Link to={`/dashboard/portfolio/edit/${item.id}`}>
-                                {item.projectTitle}
-                            </Link>
-                        </div>
+
+class PortfolioEditList extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+
+    handleDelete = (e) => {
+       const id = e.target.getAttribute('data-id');
+       this.props.startRemovePortfolioItem({id})
+    }
+
+    render() {
+        return (
+            <Container>
+            <Row>
+                <Col className="col-xs-12">
+                <h5 className="float-right">Your Portfolio</h5>
+                </Col>
+            </Row>
+                
+            <Row>
+                <Col className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div className="card text-white bg-secondary mb-3">
+                        <div className="portfolio-list">
+                        {this.props.portfolio.map((item) => (
+                            <PortfolioEditListItem key={uuid()} portfolioItem={item} handleDelete={this.handleDelete} />
+                        ))}      
+                        </div>          
                     </div>
-                )
-            })}
-        </div>
-    </div>
-)
+                </Col>
+            </Row>
+        
+            </Container>
+        )
+    }
 
-export default PortfolioEditList;
+}
+
+
+const mapStateToProps = (state, props) => {
+    return {
+        portfolio: state.portfolio
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        startRemovePortfolioItem: ({id}) => dispatch(startRemovePortfolioItem({id}))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PortfolioEditList)

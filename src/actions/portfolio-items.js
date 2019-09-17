@@ -22,6 +22,7 @@ export const startAddPortfolioItem = (portfolioItemData = {}) => {
             techSpecs = '',
             previewImg = '',
             portcats = [],
+            auxImgs = [],
             createDate = moment().valueOf(),
             lastUpdated = moment().valueOf(),
             githubUrl = ''
@@ -35,6 +36,7 @@ export const startAddPortfolioItem = (portfolioItemData = {}) => {
             techSpecs,
             previewImg,
             portcats,
+            auxImgs,
             createDate,
             lastUpdated,
             githubUrl
