@@ -1,9 +1,10 @@
 import  React, { useState } from 'react';
-
+import ImageWithPreloader from './ImageWithPreloader';
 
 const PortRailItem = (props) => {
     const {projectTitle, shortDesc, propcats, previewImg} = props.data;
     const [infoClass, setInfoClass] = useState('');
+
 
     const handleMouseEnter = (e) => {
         setInfoClass('railItem__info--expanded');
@@ -13,13 +14,11 @@ const PortRailItem = (props) => {
         setInfoClass('');
     }
 
-    
-
     return (
         <div>
             <div className="railItem__outer" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                 <div className="railItem__inner">
-                    <img src={previewImg} />
+                    <ImageWithPreloader src={previewImg} className="railitem__img-preloader" />
                     <div className={`railItem__info ${infoClass}`}>
                         <h5>{projectTitle}</h5>
                         <div className={`railItem__info--short-desc ${infoClass}`}>
@@ -33,3 +32,4 @@ const PortRailItem = (props) => {
 }
 
 export default PortRailItem;
+

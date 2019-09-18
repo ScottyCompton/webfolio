@@ -3,7 +3,7 @@ import React from 'react';
 
 const LoadingPage = () => (
         <div className="loading-page">
-            <img className="loading-page__image" src="./images/banana.gif" />
+            <img className="loading-page__image" src="./images/spinner.gif" />
         </div>
 );
 

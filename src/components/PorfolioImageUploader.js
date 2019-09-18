@@ -55,19 +55,15 @@ class PorfolioImageUploader extends React.Component {
         .child(filename)
         .getDownloadURL()
         .then((url) => {
-            //this.setState({ previewImg: url })
-            console.log('UPLOAD URL', url);
             this.props.retrieveImgUrl(url);
         })
         .then(
             () => {
-                //this.doPostData();
                 this.props.doPostData();
             })
         .then(
             () => {
                 this.props.showSuccess();
-                //this.doMsgModal('The portfolio entry was successfully saved');
             });
     }
         
@@ -79,7 +75,8 @@ class PorfolioImageUploader extends React.Component {
             filesToStore.push(files[i]);
         }
         this.setState({ files: filesToStore });
-        this.props.updateNewPreviewImgAdded()
+
+        this.props.updateNewPreviewImgAdded(filesToStore[0])
       }
 
 

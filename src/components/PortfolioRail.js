@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Slider from 'react-slick';
 import uuid from 'uuid';
 import PortRailItem from './PortRailItem';
+import SliderArrow from './SliderArrow';
 
 
 class PortfolioRail extends React.Component {
@@ -14,7 +15,6 @@ class PortfolioRail extends React.Component {
 
     render() {
     
-
           const portItems = this.props.portfolio.filter((item) => {     
               return (item.portcats && item.portcats.indexOf(this.props.catId+'') !== -1)                    
           })
@@ -25,9 +25,53 @@ class PortfolioRail extends React.Component {
             centerPadding: "80px",
             infinite: true,
             speed: 500,
-            slidesToShow: 3,
             slidesToScroll: 1,
-            centerMode: true
+            centerMode: false,
+            ladyLoad: true,
+            slidesToShow: 5,
+            nextArrow: <SliderArrow type='next' />,
+            prevArrow: <SliderArrow type='prev' />,
+            responsive: [
+                {
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        swipeToSlide: true,
+                        centerMode: true
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        arrows: false,
+                        swipeToSlide: true,
+                        centerMode: true
+                    }
+                },
+                {
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        arrows: true,
+                        centerMode: false
+                    }
+                },
+                {
+                    breakpoint: 1900,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 4,
+                        arrows: true,
+                        swipeToSlide: false,
+                        centerMode: false
+                    }
+                }
+            ]
           };    
 
         return (

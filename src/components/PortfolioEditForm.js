@@ -1,6 +1,6 @@
 import React from 'react';
 import { firebase } from '../firebase/firebase';
-//import FileUploader from 'react-firebase-file-uploader';
+import { history } from '../routers/AppRouter';
 import moment from 'moment';
 import PortCatSelect from './PortCatSelect';
 import {camelCase} from 'lodash';
@@ -27,20 +27,26 @@ class PortfolioEditForm extends React.Component {
             auxImgs: portfolioItem && portfolioItem.auxImgs ? portfolioItem.auxImgs : [],
             githubUrl:  portfolioItem ? portfolioItem.githubUrl : '',
             portcats:  portfolioItem && portfolioItem.portcats ? portfolioItem.portcats : [],
-            error: '',
+            msgModal: {
+                show: false,
+                type: 'INFO',
+                message: ''
+            },
             newPreviewImgAdded: false,
-            message: '',
-            showMsgModal: false,
             isUploading: false,
+            modalConfirm: this.onExitConfirm,
             lastUpdated: portfolioItem ? portfolioItem.lastUpdated : moment().valueOf(),
-            createDate: portfolioItem ? portfolioItem.createDate : moment().valueOf()
+            createDate: portfolioItem ? portfolioItem.createDate : moment().valueOf(),
+            isDirty: false
         }
     }
 
 
 
     onTextChange = (e) => {
-        let stateObj = {};
+        let stateObj = {
+            isDirty: true
+        };
         const fldName = camelCase(e.target.id);
         stateObj[fldName] = e.target.value;
         this.setState(stateObj);
@@ -59,7 +65,8 @@ class PortfolioEditForm extends React.Component {
             portcats.splice(portcats.indexOf(value), 1);
         }
         this.setState({
-            portcats
+            portcats,
+            isDirty: true
         });
     }
 
@@ -69,25 +76,19 @@ class PortfolioEditForm extends React.Component {
 
         if(!this.state.projectTitle || !this.state.shortDesc) {
             // set error state - please provide a title and a description
-            this.doErrorModal("You need to provide a title and a description.");
+            this.doErrorModal('You need to provide a title and a description.');
             return false;
         }
 
         if(!this.state.portcats || this.state.portcats.length === 0) {
-            this.doErrorModal("At least one category is required");
+            this.doErrorModal('At least one category is required');
             return false;
         }
         this.closeMsgModal();
 
-        // const {files} = this.state;
-
-        // if (files.length !== 0) {
-        //     files.forEach(file => {
-        //       this.fileUploader.startUpload(file)
-        //     });
         if(!this.state.newPreviewImgAdded) {
             this.doPostData();
-            this.doMsgModal('The portfolio entry was successfully saved');
+            this.doSuccessModal('The portfolio entry was successfully saved');
         } else {
             this.setState({
                 execPostFromUpload: true,
@@ -104,7 +105,6 @@ class PortfolioEditForm extends React.Component {
     }
 
     retrieveAuxImgUrl = (url) => {
-        console.log(url);
         const auxImgs = this.state.auxImgs;
         auxImgs.push(url);
         this.setState({ auxImgs: auxImgs })
@@ -112,41 +112,54 @@ class PortfolioEditForm extends React.Component {
 
 
     showPreviewImgUploadSuccess = () => {
-        this.doMsgModal('The portfolio entry was successfully saved');
+        this.doSuccessModal('The portfolio entry was successfully saved');
     }
 
     showAuxImgUploadSuccess = () => {
-        this.doMsgModal('Slideshow Image successfully added to portfolio');
+        this.doSuccessModal('Slideshow Image successfully added to portfolio');
     }
 
-
-    updateNewPreviewImgAdded = () => {
+    updateNewPreviewImgAdded = (newFile) => {
+        const tmppath = (window.URL || window.webkitURL).createObjectURL(newFile);
         this.setState({
+            previewImg: tmppath,
+            isDirty: true,
             newPreviewImgAdded: true
         })
     }
 
     doErrorModal = (error) => {
-        this.setState({
-            error,
-            message: '',
-            showMsgModal: true
-        })        
+        this.doMsgModal('ERROR', error);
     }    
 
-    doMsgModal = (message) => {
+    doSuccessModal = (message) => {
+        this.doMsgModal('SUCCESS', message);
+    }
+
+    doInfoModal = (message) => {
+        this.doMsgModal('INFO',message);
+    }
+
+
+    doMsgModal = (type, message) => {
         this.setState({
-            error: '',
-            message,
-            showMsgModal: true
+            msgModal: {
+                type,
+                message,
+                show: true
+            }
         })        
     }
 
     closeMsgModal = () => {
         this.setState(
-            {error: '',
-            message: '',
-            showMsgModal: false}
+            {
+                msgModal: {
+                    type: 'INFO',
+                    show: false,
+                    message: ''
+                }
+            }
         )
     }
 
@@ -165,10 +178,41 @@ class PortfolioEditForm extends React.Component {
             lastUpdated: moment().valueOf()
         });
         this.setState({
-            execPostFromUpload: false
+            execPostFromUpload: false,
+            isDirty: false
         })
     }
 
+
+    doConfirmExit = (e) => {
+        const isDirty = this.state.isDirty;
+        if(isDirty) {
+            this.doInfoModal('You have unsaved changes. Leave without saving your changes?');
+        } else {
+            this.onExitConfirm(e);
+        }
+    }
+
+    onExitConfirm = (e) => {
+        history.push('/dashboard/portfolio');
+    }
+
+
+    doConfirmDelAuxImg = (e) => {
+        this.setState({
+            modalConfirm: this.handleDelAuxImg,
+            modalCancel: this.handleCancelDelAuxImg
+        });
+        this.doInfoModal('Are you sure you want to delete this slide image');
+    }
+
+    handleCancelDelAuxImg = (e) => {
+        this.closeMsgModal();
+        this.setState({
+            modalConfirm: this.doConfirmExit,
+            modalCancel: this.closeMsgModal
+        });
+    }
 
 
     handleDelAuxImg = (e) => {
@@ -179,6 +223,11 @@ class PortfolioEditForm extends React.Component {
         this.setState({
             auxImgs
         });
+        this.doPostData();
+        this.handleCancelDelAuxImg(e);
+        setTimeout(() => {
+            this.doSuccessModal('Slideshow Image successfully removed');
+        }, 500)
     }
 
     render() {
@@ -192,7 +241,13 @@ class PortfolioEditForm extends React.Component {
             
             <div className="card text-white bg-secondary mb-3">
 
-                <MessageModal onHide={this.closeMsgModal} showMsgModal={this.state.showMsgModal} error={this.state.error} message={this.state.message} />
+                <MessageModal 
+                    onHide={this.closeMsgModal} 
+                    onConfirm={this.state.modalConfirm} 
+                    show={this.state.msgModal.show} 
+                    type={this.state.msgModal.type} 
+                    message={this.state.msgModal.message} 
+                    />
                 <div className="card-body">
                     <form id="form-portfolio"  onSubmit={this.onSubmit}>
                     <Row>
@@ -266,16 +321,15 @@ class PortfolioEditForm extends React.Component {
                                     <Tab eventKey="main-img" title="Main Image">
 
                                         <div className="card bg-dark mb-3 text-center">
-                                            {this.state.previewImg === '' && <p><br />No Primary Images</p>}
+                                            {this.state.previewImg === '' && <p><br />No Main Image</p>}
                                             {this.state.previewImg.length > 0 && <div>
                                             <img src={this.state.previewImg} className="preview-img" />
                                             </div>}                        
                                         </div>
-                                        <div>&nbsp;</div>
                                         <div className="form-group text-center">
                                             <PorfolioImageUploader 
                                                 name="uploadImg"
-                                                btnText = "Select Primary Image"
+                                                btnText = "Select Main Image"
                                                 className="form-control"
                                                 storageRef="portfolio"
                                                 allowChooseImage={true}
@@ -299,7 +353,7 @@ class PortfolioEditForm extends React.Component {
                                                     return (
                                                         <div key={uuid()} className="aux-img-list-item">
                                                             <div className="aux-img"><img src={img} /></div>
-                                                            <div className="aux-img-btns"><Link to="#preview" className="badge badge-primary">Preview</Link> <Link to="#delete" data-idx={idx} onClick={this.handleDelAuxImg} className="badge badge-danger">Delete</Link></div>
+                                                            <div className="aux-img-btns"><Link to="#preview" className="badge badge-primary">Preview</Link> <Link to="#delete" data-idx={idx} onClick={this.doConfirmDelAuxImg} className="badge badge-danger">Delete</Link></div>
                                                         </div>
                                                     );
                                                 })}
@@ -332,8 +386,8 @@ class PortfolioEditForm extends React.Component {
                                 </div>
                             </div>
                             <div className="form-group">
-                            <button className="btn btn-success form-control" type="submit">{this.props.portfolioItem ? 'Update' :  'Create'} Portfolio Item</button><br /><br />
-                            <Link className="btn btn-primary form-control" to="/dashboard/portfolio">Back To Portfolio</Link>
+                            <Button className="btn btn-success form-control" type="submit">{this.props.portfolioItem ? 'Update' :  'Create'} Portfolio Item</Button><br /><br />
+                            <Button className="btn btn-primary form-control" onClick={this.doConfirmExit}>Back To Portfolio</Button>
                         </div>           
                         
                         </Col>
@@ -350,83 +404,3 @@ class PortfolioEditForm extends React.Component {
 
 export default PortfolioEditForm;
 
-
-
-
-
-
-    // handleUploadStart = () => {
-    //     this.setState({ isUploading: true, progress: 0 });
-    // }
-    
-    // handleProgress = (progress) => {
-    //     this.setState({ progress });
-    // }
-    
-    // handleUploadError = error => {
-    //   this.setState({ isUploading: false });
-    //   this.setState({
-    //       error,
-    //       showMsgModal: true
-    //     });
-    // }
-
-
-    // handleUploadSuccess = (filename) => {
-    //   this.setState(
-    //       { uploadImg: filename, 
-    //         progress: 100, 
-    //         isUploading: false 
-    //     });
-    //   firebase
-    //     .storage()
-    //     .ref("portfolio")
-    //     .child(filename)
-    //     .getDownloadURL()
-    //     .then((url) => {
-    //         this.setState({ previewImg: url })
-    //     })
-    //     .then(
-    //         () => {
-    //             this.doPostData();
-    //         })
-    //     .then(
-    //         () => {
-    //             this.doMsgModal('The portfolio entry was successfully saved');
-    //         });
-    // };
-    
-    // handleAuxImgUploadSuccess = (filename) => {
-    //     this.setState(
-    //         { uploadAuxImg: filename, 
-    //           progress: 100, 
-    //           isUploading: false 
-    //       });
-    //     firebase
-    //       .storage()
-    //       .ref("portfolio")
-    //       .child(filename)
-    //       .getDownloadURL()
-    //       .then((url) => {
-    //           const auxImgs = this.state.auxImgs;
-    //           auxImgs.push(url);
-    //           this.setState({ auxImgs: auxImgs })
-    //       })
-    //       .then(
-    //           () => {
-    //               this.doPostData();
-    //           })
-    //       .then(
-    //           () => {
-    //               this.doMsgModal('Slideshow Image successfully added to portfolio');
-    //           });
-    //     };
-    
-    // handleChooseImage = (e) => {
-    //     const { target: { files } } = e;
-    //     const filesToStore = [];
-    //     for(let i = 0; i < files.length; i++) {
-    //         filesToStore.push(files[i])
-    //     }
-    //     this.setState({ files: filesToStore });
-    //   }

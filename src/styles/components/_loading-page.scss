@@ -7,6 +7,7 @@
 }
 
 .loading-page__image {
-    width: 10rem;
-    opacity: 0.5;
+    width: 100%;
+    max-width: 75px;
+    opacity: 0.3;
 }

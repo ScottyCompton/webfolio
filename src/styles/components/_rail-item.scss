@@ -44,3 +44,17 @@
         }
     }
 }
+
+.railitem__img-preloader {
+    background: url('/images/spinner.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20%;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-bottom: 150%;
+}
