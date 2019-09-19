@@ -1,3 +1,14 @@
+// Bootstrap breakpoints
+$xs-breakpoint: 576px;
+$sm-breakpoint: 576px;
+$md-breakpoint: 768px;
+$lg-breakpoint: 992px;
+$xl-breakpoint: 1200px;
+$device-xs: (max-width: $xs-breakpoint);
+$device-sm: (min-width: $sm-breakpoint);
+$device-md: (min-width: $md-breakpoint);
+$device-lg: (min-width: $lg-breakpoint);
+$device-xl: (min-width: $xl-breakpoint);
 //
 // colors
 //
@@ -55,4 +66,8 @@ $desktop-breakpoint: 45rem;
 .slick-next:before,
 .slick-prev:before {
     display: none;
+}
+
+label.btn {
+    cursor: pointer;
 }

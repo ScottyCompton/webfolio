@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import portcats from '../fixtures/portcats'
 import uuid from 'uuid';
+import ImageWithPreloader from './ImageWithPreloader';
 
 const PortfolioEditListItem = ({portfolioItem, handleDelete}) => {
     let cats = [];
@@ -17,7 +18,7 @@ const PortfolioEditListItem = ({portfolioItem, handleDelete}) => {
 
     return (
     <div className="portfolio-list__list-item">
-        <div className="portfolio-list__list-item-img"><img src={portfolioItem.previewImg} /></div>
+        <div className="portfolio-list__list-item-img"><ImageWithPreloader className="portfolio-list__list-item-preloader" src={portfolioItem.previewImg} /></div>
         <div className="portfolio-list__list-item-title"><h5>{portfolioItem.projectTitle}</h5></div>
         <div className="portfolio-list__list-item-cats">{cats.length !== 0 && cats.map((cat) => (<span key={uuid()}>{cat}</span>) )}</div>
         <div className="portfolio-list__list-item-btns">

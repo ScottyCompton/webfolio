@@ -100,11 +100,18 @@ class PorfolioImageUploader extends React.Component {
         }
 
         return (
-            <label className="btn btn-primary">{this.props.btnText}
-            <FileUploader
-                ref={instance => { this.fileUploader = instance; } }
-                {...fbuProps}
-            /></label>            
+            <div>
+                {this.state.isUploading && 
+                <div className="progress" style={{marginBottom: "10px", height:"0.2rem"}}>
+                    <div className="progress-bar bg-success" role="progressbar" style={{width: `${this.state.progress}%`,  height:"0.2rem"}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>}
+                {!this.state.isUploading && <div style={{width: "100%", height: "0.2rem", marginBottom: "10px"}}></div>}
+                <label className="btn btn-primary">{this.props.btnText}
+                <FileUploader
+                    ref={instance => { this.fileUploader = instance; } }
+                    {...fbuProps}
+                /></label>            
+            </div>
         )
     }
 }

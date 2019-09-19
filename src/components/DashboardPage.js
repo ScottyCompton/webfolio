@@ -7,8 +7,7 @@ const DashboardPage = () => (
     <div>Dashboard Page Will Go here
     
         <br /><br />
-        <Button variant="secondary">Test Button</Button>
-        <Link to="/dashboard/portfolio">Go To Portfolio</Link>
+        <Link className="btn btn-primary" to="/dashboard/portfolio">Go To Portfolio</Link>
     </div>
     </div>
     

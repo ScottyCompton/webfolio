@@ -9,15 +9,21 @@ import {Container,  Row, Col, Tabs, Tab, Button } from 'react-bootstrap'
 import MessageModal from  './MessageModal';
 import uuid from 'uuid';
 import PorfolioImageUploader from './PorfolioImageUploader';
+import PortfolioEditSelect from './PortfolioEditSelect';
+import ImageWithPreloader from './ImageWithPreloader';
+
 
 class PortfolioEditForm extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = this.initState(props.portfolioItem)
+    }
 
 
-        const {portfolioItem} = props;
-        this.state = {
+    initState(portfolioItem) {
+
+        return {
             projectTitle: portfolioItem ? portfolioItem.projectTitle : '',
             shortDesc: portfolioItem ? portfolioItem.shortDesc : '',
             longDesc: portfolioItem ? portfolioItem.longDesc : '',            
@@ -38,9 +44,8 @@ class PortfolioEditForm extends React.Component {
             lastUpdated: portfolioItem ? portfolioItem.lastUpdated : moment().valueOf(),
             createDate: portfolioItem ? portfolioItem.createDate : moment().valueOf(),
             isDirty: false
-        }
+        }        
     }
-
 
 
     onTextChange = (e) => {
@@ -77,6 +82,12 @@ class PortfolioEditForm extends React.Component {
         if(!this.state.projectTitle || !this.state.shortDesc) {
             // set error state - please provide a title and a description
             this.doErrorModal('You need to provide a title and a description.');
+            return false;
+        }
+
+        if(!this.state.previewImg) {
+            // set error state - add a preview image
+            this.doErrorModal('You need to provide a main portfolio image.');
             return false;
         }
 
@@ -197,6 +208,12 @@ class PortfolioEditForm extends React.Component {
         history.push('/dashboard/portfolio');
     }
 
+    handleEditPortfolioItemClick = (newPortfolioItem) => {
+        const newState = this.initState(newPortfolioItem);
+        this.setState(this.initState(newState));
+        history.push(`/dashboard/portfolio/edit/${newPortfolioItem.id}`);
+    }
+
 
     doConfirmDelAuxImg = (e) => {
         this.setState({
@@ -235,7 +252,9 @@ class PortfolioEditForm extends React.Component {
             <Container>
             <Row>
                 <Col className="col-xs-12">
-                <h5 className="float-right">{this.props.portfolioItem ? 'Edit' : 'Create New'} Portfolio Item</h5>
+                <div className="float-right portfolio-dropdown"></div>
+                <PortfolioEditSelect linkText={this.props.portfolioItem ? 'Edit Portfolio Item ' : 'Create New Portfolio Item'} isDirty={this.state.isDirty} handleClick={this.handleEditPortfolioItemClick} />
+
                 </Col>
             </Row>
             
