@@ -13,6 +13,7 @@ export class PortfolioListPage extends React.Component {
         }
     }
 
+
     handleDelete = (id) => {
         this.props.startRemovePortfolioItem({id})
     }

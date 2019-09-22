@@ -1,0 +1,57 @@
+$landscape_aspect_ratio: 40.9%;
+$portrait_aspect_ratio: 112.4%;
+.homeslider-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 1.0;
+    transition: opacity 0.5s ease-in;
+}
+
+.slider-perpective-transition {
+    opacity: 0;
+}
+
+.homeslider-landscape {
+    width: 100%;
+    position: relative;
+    left: 0;
+    top: 0;
+    padding-top: $landscape_aspect_ratio;
+}
+
+.homeslider-portrait {
+    width: 100%;
+    position: relative;
+    left: 0;
+    top: 0;
+    padding-top: $portrait_aspect_ratio;
+}
+
+.homeslider__foreground {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-size: contain;
+    z-index: 100;
+}
+
+.homeslider__background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+.homeslider__slider {
+    width: 100%;
+    position: relative;
+    left: 0;
+    top: 0;
+}

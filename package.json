@@ -49,7 +49,7 @@
         "react-image-and-background-image-fade": "^1.0.4",
         "react-modal": "2.2.2",
         "react-preload-image": "^1.0.4",
-        "react-redux": "^5.0.5",
+        "react-redux": "^7.1.1",
         "react-router-dom": "^5.0.1",
         "react-slick": "^0.25.2",
         "react-transition-group": "^4.3.0",

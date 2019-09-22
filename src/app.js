@@ -42,7 +42,11 @@ store.dispatch(startGetPortfolioItems()).then(() => {
 firebase.auth().onAuthStateChanged((user) => {
     if(user) {
             store.dispatch(login(user.uid));
-            history.push('/dashboard');
+            if(window.localStorage.getItem('LOGINATTEMPT') === '1') {
+                window.localStorage.removeItem('LOGINATTEMPT');
+                history.push('/dashboard');
+            }
+            //history.push('/dashboard');
             // console.log('AUTHSTATECHANGED');
     } else {
         if(history.location.pathname.includes('/dashboard')) {

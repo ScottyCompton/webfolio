@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import authReducer from '../reducers/auth';
 import portfolioItemsReducer from '../reducers/portfolio-items';
+import primLightboxReducer from '../reducers/portfolio-item-lightbox';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -11,7 +12,8 @@ export default () => {
     const store = createStore(
         combineReducers({
             auth: authReducer,
-            portfolio: portfolioItemsReducer
+            portfolio: portfolioItemsReducer,
+            primLightbox: primLightboxReducer
         }),
         composeEnhancers(applyMiddleware(thunk))
     );

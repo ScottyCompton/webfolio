@@ -1,4 +1,4 @@
-const catList =  ['PHP', 'WordPress', 'React', 'Graphic Design', 'Logo Design', 'Laravel', 'Classic ASP', 'Business Cards', 'Print Media'];
+const catList =  ['Website Design', 'Business Cards', 'Graphic Design', 'Logo Design', 'Print Media', 'Special Projects'];
 
 const portcats = (
         catList.map((name, id) => {

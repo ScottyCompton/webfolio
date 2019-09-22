@@ -1,18 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-
+import PortfolioItemLIghtbox from '../components/PortfolioItemLIghtbox'
 export const PublicRoute = ({ 
     isAuthenticated, 
     component: Component,
     ...rest
 }) => (
     <Route {...rest} component={(props) => (
-        isAuthenticated ? (
-            <Redirect to="/dashboard" />
-        ) : (
+        <div>
+            <PortfolioItemLIghtbox />
             <Component {...props} />
-        )
+        </div>
+        // isAuthenticated ? (
+        //     <Redirect to="/dashboard" />
+        // ) : (
+        //     <PortfolioRailItemModal />
+        //     <Component {...props} />
+        // )
     )} />
 );
 

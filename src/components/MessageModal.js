@@ -1,73 +1,25 @@
 import React, { useState } from 'react';
 import {Modal, Button} from 'react-bootstrap';
+import messageModalData from '../fixtures/messageModalData';
 import uuid from 'uuid';
 
 const MessageModal = (props) => {
   //let msgTitle, msgText, msgClass;
-  const {show = false, type = 'INFO', message = '', onHide, onConfirm} = props;
+  const {
+    show = false, 
+    type = 'INFO', 
+    message = '', 
+    onHide, 
+    onConfirm
+  } = props;
 
-  const modalVars = {
-      ERROR: {
-        titles: [
-          'Houston, we have a problem...',
-          'Jesus Christ, now what?!?',
-          'Nice job, dumbass...',
-          'Are you even paying attention?',
-          'That\'s not gonna work.',
-          'What are you, stupid?'
-        ],
-        textClass: "alert alert-danger",
-        buttons: [
-          <Button variant="secondary" onClick={onHide}>Close</Button>
-        ]
-      },
-      SUCCESS: {
-        titles: [
-          'Good Job!',
-          'Atta boy!',
-          'You are a champion!',
-          'Woo hoo you did it!',
-          'Congrats, dude...',
-          'All is well.'
-        ],
-        textClass: "alert alert-success",
-        buttons: [
-          <Button variant="secondary" onClick={onHide}>Close</Button>
-        ]
-      },
+  const modalVars = messageModalData({...props});
 
-      INFO: {
-        titles: [
-          'Just letting you know...',
-          'Just a thought...'
-        ],
-        textClass: "alert alert-info",
-        buttons: [
-          <Button variant="secondary" onClick={onConfirm}>Continue</Button>,
-          <Button variant="secondary" onClick={onHide}>Cancel</Button>
-        ]
-      },
 
-      WARNING: {
-        titles: [
-          'Watch out!',
-          'Danger, Will Robison!',
-          'We\'re all gonna die!',
-          'I can\'t look...'
-        ],
-        textClass: "alert alert-warning",
-        buttons: [
-          <Button variant="secondary" onClick={onHide}>Close</Button>
-        ]
-      }
+  const msgTitle = () => {
+    const arrTitles = modalVars[type].titles;
+    return arrTitles[Math.floor(Math.random()*arrTitles.length)];
   }
-
-
-
-const msgTitle = () => {
-   const arrTitles = modalVars[type].titles;
-   return arrTitles[Math.floor(Math.random()*arrTitles.length)];
-}
 
 
 

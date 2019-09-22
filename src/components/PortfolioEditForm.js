@@ -38,8 +38,10 @@ class PortfolioEditForm extends React.Component {
                 type: 'INFO',
                 message: ''
             },
+            isNew: !portfolioItem,
             newPreviewImgAdded: false,
-            isUploading: false,
+            previousImg: undefined,
+            previousAuxImg: undefined,
             modalConfirm: this.onExitConfirm,
             lastUpdated: portfolioItem ? portfolioItem.lastUpdated : moment().valueOf(),
             createDate: portfolioItem ? portfolioItem.createDate : moment().valueOf(),
@@ -132,7 +134,9 @@ class PortfolioEditForm extends React.Component {
 
     updateNewPreviewImgAdded = (newFile) => {
         const tmppath = (window.URL || window.webkitURL).createObjectURL(newFile);
+        const previousImg = this.state.previewImg;
         this.setState({
+            previousImg,
             previewImg: tmppath,
             isDirty: true,
             newPreviewImgAdded: true
@@ -190,7 +194,8 @@ class PortfolioEditForm extends React.Component {
         });
         this.setState({
             execPostFromUpload: false,
-            isDirty: false
+            isDirty: false,
+            previousImg: undefined
         })
     }
 
@@ -216,24 +221,46 @@ class PortfolioEditForm extends React.Component {
 
 
     doConfirmDelAuxImg = (e) => {
+        const idx = e.target.getAttribute('data-idx');
+        const previousAuxImg = this.state.auxImgs[idx];
+
         this.setState({
+            previousAuxImg,
             modalConfirm: this.handleDelAuxImg,
             modalCancel: this.handleCancelDelAuxImg
         });
-        this.doInfoModal('Are you sure you want to delete this slide image');
+        this.doInfoModal('Are you sure you want to delete this slide image?');
     }
 
     handleCancelDelAuxImg = (e) => {
         this.closeMsgModal();
         this.setState({
             modalConfirm: this.doConfirmExit,
-            modalCancel: this.closeMsgModal
+            modalCancel: this.closeMsgModal,
+            previousAuxImg: undefined
         });
     }
 
 
     handleDelAuxImg = (e) => {
         e.preventDefault();
+
+        const {previousAuxImg} = this.state
+        if(previousAuxImg) {
+            const imgNameRight = previousAuxImg.split('%2F').pop(); // everything after %2f
+            const imgName = imgNameRight.split('?').shift() // everything before ?
+            // imgName should be 8wjseysfas-fkdfysdf3.jpg or something similar
+            firebase
+            .storage()
+            .ref('portfolio')
+            .child(imgName)
+            .delete()
+            .then(() => {
+                console.log(`## deleted ${imgName} from storage`);
+            }).catch((err) => {
+                console.log(`Could not delete ${imgName} because of the following error:`, err);
+            })
+        }        
         const {auxImgs} = this.state;
         const auxImgIdx = e.target.getAttribute('data-idx');
         auxImgs.splice(auxImgIdx,1)
@@ -244,7 +271,8 @@ class PortfolioEditForm extends React.Component {
         this.handleCancelDelAuxImg(e);
         setTimeout(() => {
             this.doSuccessModal('Slideshow Image successfully removed');
-        }, 500)
+        }, 500)        
+
     }
 
     render() {
@@ -252,9 +280,8 @@ class PortfolioEditForm extends React.Component {
             <Container>
             <Row>
                 <Col className="col-xs-12">
-                <div className="float-right portfolio-dropdown"></div>
-                <PortfolioEditSelect linkText={this.props.portfolioItem ? 'Edit Portfolio Item ' : 'Create New Portfolio Item'} isDirty={this.state.isDirty} handleClick={this.handleEditPortfolioItemClick} />
-
+                    <div className="float-right portfolio-dropdown"></div>
+                    <PortfolioEditSelect isNew={this.state.isNew} linkText={this.props.portfolioItem ? 'Edit Portfolio Item ' : 'Create New Portfolio Item'} isDirty={this.state.isDirty} handleClick={this.handleEditPortfolioItemClick} />
                 </Col>
             </Row>
             
@@ -351,12 +378,13 @@ class PortfolioEditForm extends React.Component {
                                                 btnText = "Select Main Image"
                                                 className="form-control"
                                                 storageRef="portfolio"
+                                                previousImg={this.state.previousImg}
                                                 allowChooseImage={true}
                                                 updateNewPreviewImgAdded={this.updateNewPreviewImgAdded}
                                                 execPostFromUpload={this.state.execPostFromUpload}
                                                 retrieveImgUrl={this.retrievePreviewImgUrl}
                                                 doPostData={this.doPostData}
-                                                onSubmit={this.doSubmit}
+                                                //onSubmit={this.doSubmit}
                                                 showError={this.doErrorModal}
                                                 showSuccess={this.showPreviewImgUploadSuccess}
                                             />                                            
@@ -384,6 +412,7 @@ class PortfolioEditForm extends React.Component {
                                             btnText = "Add Slideshow Image"
                                             className="form-control"
                                             allowChooseImage={false}
+                                            previousImg={this.state.previousAuxImg}
                                             storageRef="portfolio"
                                             retrieveImgUrl={this.retrieveAuxImgUrl}
                                             showError={this.doErrorModal}

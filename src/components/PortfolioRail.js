@@ -1,28 +1,21 @@
 import React from 'react';
 import {Button, Row, Col, Container} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import { connect } from 'react-redux';
 import Slider from 'react-slick';
 import uuid from 'uuid';
 import PortRailItem from './PortRailItem';
 import SliderArrow from './SliderArrow';
 
 
-class PortfolioRail extends React.Component {
-    constructor(props) {
-        super(props)
-    }
 
-    render() {
+const PortfolioRail = (props) => {
     
-          const portItems = this.props.portfolio.filter((item) => {     
-              return (item.portcats && item.portcats.indexOf(this.props.catId+'') !== -1)                    
-          })
+        const portItems = props.portfolio;
+
+        
 
           const settings = {
             dots: false,
-            className: "center",
-            centerPadding: "80px",
             infinite: true,
             speed: 500,
             slidesToScroll: 1,
@@ -39,7 +32,7 @@ class PortfolioRail extends React.Component {
                         slidesToScroll: 1,
                         arrows: false,
                         swipeToSlide: true,
-                        centerMode: true
+                        centerMode: false
                     }
                 },
                 {
@@ -49,11 +42,12 @@ class PortfolioRail extends React.Component {
                         slidesToScroll: 2,
                         arrows: false,
                         swipeToSlide: true,
-                        centerMode: true
+                        centerMode: false
                     }
                 },
+
                 {
-                    breakpoint: 992,
+                    breakpoint: 1200,
                     settings: {
                         slidesToShow: 3,
                         slidesToScroll: 3,
@@ -65,7 +59,7 @@ class PortfolioRail extends React.Component {
                     breakpoint: 1900,
                     settings: {
                         slidesToShow: 4,
-                        slidesToScroll: 4,
+                        slidesToScroll:4,
                         arrows: true,
                         swipeToSlide: false,
                         centerMode: false
@@ -76,28 +70,20 @@ class PortfolioRail extends React.Component {
 
         return (
             portItems.length > 0 &&
-            <div>
-                <h4>{this.props.title}</h4>
+            <div className="portfolio-rail">
+                <h4 className="portfolio-rail__title">{props.title}</h4>
                 <Slider {...settings}>
                     {portItems.map((item) => {
                         return (
-                            <PortRailItem data={item} key={uuid()} />
+                            <PortRailItem onClickShowPortfolioItem={props.onClickShowPortfolioItem} data={item} key={uuid()} />
                         )
                     })}
                 </Slider>
             </div>
         )
     }
-}
 
 
-const mapStateToProps = (state, props) => {
-    return {
-        portfolio: state.portfolio
-    }
-}
-
-export default connect(mapStateToProps)(PortfolioRail);
-
+export default PortfolioRail;
 
 

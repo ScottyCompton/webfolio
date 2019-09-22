@@ -17,7 +17,7 @@ class PorfolioImageUploader extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if((prevProps.execPostFromUpload !== this.props.execPostFromUpload) && this.props.execPostFromUpload) {
+        if(this.props.execPostFromUpload && (prevProps.execPostFromUpload !== this.props.execPostFromUpload)) {
             const {files} = this.state;
 
             if (files.length !== 0) {
@@ -56,6 +56,27 @@ class PorfolioImageUploader extends React.Component {
         .getDownloadURL()
         .then((url) => {
             this.props.retrieveImgUrl(url);
+        })
+        .then(() =>{
+            const {previousImg} = this.props;
+            if(previousImg) {
+                console.log('previousImg = ', previousImg)
+                const imgNameRight = previousImg.split('%2F').pop(); // everything after %2f
+                console.log('imgNameRight = ', imgNameRight)
+                const imgName = imgNameRight.split('?').shift() // everything before ?
+                // imgName should be 8wjseysfas-fkdfysdf3.jpg or something similar
+                console.log(imgName);
+                firebase
+                .storage()
+                .ref(this.props.storageRef)
+                .child(imgName)
+                .delete()
+                .then(() => {
+                    console.log(`## deleted ${imgName} from storage`);
+                }).catch((err) => {
+                    console.log(`Could not delete ${imgName} because of the following error:`, err);
+                })
+            }
         })
         .then(
             () => {

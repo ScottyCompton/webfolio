@@ -7,6 +7,7 @@ export const login = (uid) => ({
 
 
 export const startLogin = () => {
+    window.localStorage.setItem('LOGINATTEMPT','1');
     return () => {
         return firebase.auth().signInWithPopup(googleAuthProvider);
     };

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import portcats from '../fixtures/portcats'
-import { connect } from 'react-redux'
+// import portcats from '../fixtures/portcats'
+// import { connect } from 'react-redux'
 import uuid from 'uuid';
 import MessageModal from './MessageModal';
-import {Accordion, useAccordionToggle} from 'react-bootstrap'
+import {Accordion, useAccordionToggle} from 'react-bootstrap';
+import PortfolioItemsWithCats from './PortfolioItemsWithCats';
 
-
-class PortfolioEditSelect extends React.Component {
+export default class PortfolioEditSelect extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -16,7 +16,7 @@ class PortfolioEditSelect extends React.Component {
             navToId: '#',
             dropdownActiveClass: ''
         }
-        document.addEventListener('click', this.handleDocClick);        
+        //document.addEventListener('click', this.handleDocClick);        
     }
 
     componentDidUpdate(prevProps) {
@@ -81,39 +81,9 @@ class PortfolioEditSelect extends React.Component {
         )
     }
 
-    // handleDropdownBtnClick = () => {
-    //     this.setState({
-    //         dropdownActiveClass: this.state.dropdownActiveClass === '' ? 'dropdown-active' : '' 
-    //     })
-    // }
-
-    //{this.props.portfolioItem && <EditSelectToggle eventKey="0">Edit Portfolio Item</EditSelectToggle>}
-
 
     render() {
-        const portfolioItemsWithCats = portcats.map((cat) => {
-            let catId = cat.id;
-            let catName = cat.name;
-            let portItems = this.props.portfolio.filter((item) => {     
-                return (item.portcats && item.portcats.indexOf(catId+'') !== -1)                    
-            })            
-            return (
-                portItems.length > 0 &&
-                <div key={uuid()} className="portfolio-edit-select__group">
-                    <h6>{catName}</h6>
-                    <div className="portfolio-edit-select__list">
-                        {portItems.map((item) => {
-                            return (
-                                <div key={uuid()} className="portfolio-edit-select__item">
-                                    <Link to="#" data-id={item.id} onClick={this.handleItemClick}>{item.projectTitle}</Link>
-                                </div>
-                                )
-                        })}  
-                    </div>
-                </div>
-                
-            )
-        })
+
 
         return (
             <div>
@@ -125,11 +95,11 @@ class PortfolioEditSelect extends React.Component {
                 message="You have unsaved changes. Leave without saving your changes?"
                 />
                 <Accordion>
-                    <EditSelectToggle eventKey="0">{this.props.linkText}</EditSelectToggle>
+                    <EditSelectToggle isNew={this.props.isNew} eventKey="0">{this.props.linkText}</EditSelectToggle>
                     <Accordion.Collapse eventKey="0">
                         <div className="portfolio-edit-select">
                             <div className="portfolio-edit-select__container">
-                                {portfolioItemsWithCats}           
+                                <PortfolioItemsWithCats onClick={this.handleItemClick} />
                             </div>
                         </div>
                     </Accordion.Collapse>
@@ -143,14 +113,14 @@ class PortfolioEditSelect extends React.Component {
 }
 
 
-const mapStateToProps = (state, props) => {
-    return {
-        portfolio: state.portfolio
-    }
-}
+// const mapStateToProps = (state, props) => {
+//     return {
+//         portfolio: state.portfolio
+//     }
+// }
 
 
-export const EditSelectToggle = ({ children, eventKey }) => {
+export const EditSelectToggle = ({ children, eventKey, isNew=false }) => {
     const decoratedOnClick = useAccordionToggle(eventKey, () =>
       console.log('totally custom!'),
     );
@@ -158,13 +128,9 @@ export const EditSelectToggle = ({ children, eventKey }) => {
         <div>
             <h5 style={{textAlign: "right"}}>
                 <Link style={{color: "white"}} to="#" onClick={decoratedOnClick}>{children}</Link>
+                {!isNew && <Link className="portfolio-list__create-new btn btn-secondary float-right" to="/dashboard/portfolio/create">Create New Item</Link>}
+
             </h5>
         </div>
     );
   }
-
-
-export default connect(mapStateToProps)(PortfolioEditSelect);
-
-
-
