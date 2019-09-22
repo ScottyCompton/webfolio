@@ -1,6 +1,6 @@
 
 const admPortListReducerDefaultState = {
-    catId: ''
+    catId: '-1'
 };
 
 // filters reducer
@@ -10,7 +10,7 @@ export default (state = admPortListReducerDefaultState, action) => {
         case 'LIST_BY_CATEGORY':            
             return {
                 ...state, 
-                catId: catId
+                catId: action.catId
             }
         
         case 'LIST_ALL':

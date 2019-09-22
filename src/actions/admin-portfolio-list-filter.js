@@ -1,6 +1,6 @@
 
 // SET_TEXT_FILTER
-export const listByCategory = (catId = '') => ({
+export const listByCategory = ({catId}) => ({
     type: 'LIST_BY_CATEGORY',
     catId
 });

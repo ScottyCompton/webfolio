@@ -3,9 +3,15 @@
 // get portfoli by category
 
 export default (portfolio, {catId}) => {
-    return portfolio.filter((item) => {
-        return (item.portcats && item.portcats.indexOf(catId + '') !== -1)                    
-     });
+
+    if(catId !== '-1') {
+        const filtered = portfolio.filter((item) => {
+            return (item.portcats && item.portcats.indexOf(catId + '') !== -1)                    
+         });            
+         return filtered;
+    } else {
+        return portfolio;
+    }
     // .sort((a,b) => {
     //     if(sortBy === 'date') {            
     //         return dateSortOrder === 'ASC' ? (

@@ -19,7 +19,7 @@ const DashboardPage = () => (
                 <h5>Your Settings</h5>            
             </div>        
             <div>
-                Various site settings will go here
+                <Link className="btn btn-primary" to="/dashboard/portfolio">Manage Portfolio</Link>
             </div>
         </Col>
     </Row>
