@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
 import uuid from 'uuid';
-import portcats from '../fixtures/portcats'
+import portcats from 'fixtures/portcats';
 import PortCatSelectItem from './PortCatSelectItem';
 
 export class PortCatSelect extends React.Component {

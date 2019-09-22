@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Modal, Button} from 'react-bootstrap';
-import messageModalData from '../fixtures/messageModalData';
+import messageModalData from 'fixtures/messageModalData';
 import uuid from 'uuid';
 
 const MessageModal = (props) => {

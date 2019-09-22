@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import uuid from 'uuid';
 import {Container, Row, Col} from 'react-bootstrap';
 //import { connect } from 'react-redux';
-import { startRemovePortfolioItem } from '../actions/portfolio-items';
+import { startRemovePortfolioItem } from 'actions/portfolio-items';
 import PortfolioEditListItem from './PortfolioEditListItem';
 import { Link } from 'react-router-dom';
 import MessageModal from  './MessageModal';

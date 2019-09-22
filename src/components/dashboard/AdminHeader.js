@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { startLogout } from '../actions/auth';
+import { startLogout } from 'actions/auth';
 
 export const AdminHeader = ({ startLogout }) => (
     <header className="header bg-light">        

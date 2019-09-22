@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import portcats from '../fixtures/portcats'
+import portcats from 'fixtures/portcats';
 import uuid from 'uuid';
-import ImageWithPreloader from './ImageWithPreloader';
+import ImageWithPreloader from 'components/ImageWithPreloader';
 
 const PortfolioEditListItem = ({portfolioItem, handleDelete}) => {
     let cats = [];

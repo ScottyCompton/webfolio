@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import PortfolioEditList from './PortfolioEditList';
-import { startRemovePortfolioItem } from '../actions/portfolio-items';
+import { startRemovePortfolioItem } from 'actions/portfolio-items';
 import MessageModal from  './MessageModal';
 
 export class PortfolioListPage extends React.Component {

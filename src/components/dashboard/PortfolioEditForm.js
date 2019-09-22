@@ -1,6 +1,6 @@
 import React from 'react';
-import { firebase } from '../firebase/firebase';
-import { history } from '../routers/AppRouter';
+import { firebase } from 'firebase/firebase';
+import { history } from 'routers/AppRouter';
 import moment from 'moment';
 import PortCatSelect from './PortCatSelect';
 import {camelCase} from 'lodash';
@@ -10,8 +10,6 @@ import MessageModal from  './MessageModal';
 import uuid from 'uuid';
 import PorfolioImageUploader from './PorfolioImageUploader';
 import PortfolioEditSelect from './PortfolioEditSelect';
-import ImageWithPreloader from './ImageWithPreloader';
-
 
 class PortfolioEditForm extends React.Component {
 

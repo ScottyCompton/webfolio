@@ -43,6 +43,8 @@
         "react-addons-shallow-compare": "^15.6.0",
         "react-bootstrap": "^1.0.0-beta.12",
         "react-dates": "^12.7.0",
+        "react-dnd": "^9.4.0",
+        "react-dnd-html5-backend": "^9.4.0",
         "react-dom": "^16.9.0",
         "react-firebase-file-uploader": "^2.4.2",
         "react-image": "^2.2.0",
