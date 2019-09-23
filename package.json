@@ -1,8 +1,8 @@
 {
-    "name": "boilerplate-react-app",
+    "name": "webfolio",
     "version": "1.0.0",
     "main": "index.js",
-    "author": "Scott Lonis",
+    "author": "Scott C. Lonis",
     "license": "MIT",
     "scripts": {
         "start": "node server/server.js",
