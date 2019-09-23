@@ -23,6 +23,7 @@ export const startAddPortfolioItem = (portfolioItemData = {}) => {
             previewImg = '',
             portcats = [],
             auxImgs = [],
+            cso = [],
             createDate = moment().valueOf(),
             lastUpdated = moment().valueOf(),
             githubUrl = ''
@@ -37,6 +38,7 @@ export const startAddPortfolioItem = (portfolioItemData = {}) => {
             previewImg,
             portcats,
             auxImgs,
+            cso,
             createDate,
             lastUpdated,
             githubUrl
@@ -64,11 +66,15 @@ export const updatePortfolioItem = (id, updates) => {
 
 
 export const startUpdatePortfolioItem = (id, updates) => {
+    
     return(dispatch, getState) => {
         //const uid = getState().auth.uid;
+
         return db.ref(`portfolio/${id}`).update(updates).then(() => {
             dispatch(updatePortfolioItem(id, updates));
-        });
+        }).catch((err) => {
+            console.log(err);
+        }) ;
     }
 };
 

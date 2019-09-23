@@ -3,6 +3,7 @@ import portcats from '../fixtures/portcats'
 import uuid from 'uuid';
 import PortfolioRail from './PortfolioRail';
 import { connect } from 'react-redux';
+import portfolioListFilter from 'selectors/portfolio-list-filter'
 
 
 
@@ -17,9 +18,11 @@ class PortCatRails extends React.Component {
             <div>
                 {
                     portcats.map((cat) => {
-                        const portfolioByCat = this.props.portfolio.filter((item) => {     
-                            return (item.portcats && item.portcats.indexOf(cat.id+'') !== -1)                    
-                        })
+                        // const portfolioByCat = this.props.portfolio.filter((item) => {     
+                        //     return (item.portcats && item.portcats.indexOf(cat.id+'') !== -1)                    
+                        // })
+                        const portfolioByCat = portfolioListFilter(this.props.portfolio, {catId: cat.id});
+
               
                         return (
                             <PortfolioRail key={uuid()} portfolio={portfolioByCat} title={cat.name} catId={cat.id} />

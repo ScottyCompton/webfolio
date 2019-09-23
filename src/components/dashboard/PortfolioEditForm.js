@@ -20,7 +20,8 @@ class PortfolioEditForm extends React.Component {
 
 
     initState(portfolioItem) {
-
+        const csoArray = this.setCsoArray(portfolioItem.cso, portfolioItem.portcats)
+        const isDirty = portfolioItem.cso && csoArray.length !== portfolioItem.cso.length;        
         return {
             projectTitle: portfolioItem ? portfolioItem.projectTitle : '',
             shortDesc: portfolioItem ? portfolioItem.shortDesc : '',
@@ -43,7 +44,8 @@ class PortfolioEditForm extends React.Component {
             modalConfirm: this.onExitConfirm,
             lastUpdated: portfolioItem ? portfolioItem.lastUpdated : moment().valueOf(),
             createDate: portfolioItem ? portfolioItem.createDate : moment().valueOf(),
-            isDirty: false
+            isDirty: isDirty, 
+            cso: csoArray
         }        
     }
 
@@ -60,19 +62,80 @@ class PortfolioEditForm extends React.Component {
 
     handlePortCatSelect = (e) => {
         const portcats = this.state.portcats;
+        const cso = this.state.cso;        
         const {checked, value} = e.target;
+
+        // this is just a check against trash data, at lease during development
+
+
+        cso.forEach((item, idx) => {
+            if(item.catId===undefined || item.sortOrder===undefined) {
+                cso.splice(idx,1)
+            }
+        })
 
         if(checked) {
             // add the id to the portcats array
             portcats.push(value);
+
+            // add to the cso array, make the sortOrder -1
+            const csoIndex = this.state.cso.findIndex((item) => {
+                return item.catId+'' === value+'';
+            })
+
+            if (csoIndex === -1) {
+                cso.push({
+                    catId: value,
+                sortOrder: -1
+                })
+            }
         } else {
             // remove the id from the portcats array
             portcats.splice(portcats.indexOf(value), 1);
+
+            // add to the cso array, make the sortOrder -1
+            const csoIndex = this.state.cso.findIndex((item) => {
+                return item.catId+'' === value;
+            })
+
+            if (csoIndex !== -1) {
+                cso.splice(csoIndex,1)
+            }
+
         }
+
         this.setState({
             portcats,
+            cso,
             isDirty: true
         });
+
+    }
+
+    setCsoArray = (arrCso = [], arrPortcats = []) => {
+        // the only purpose to this function is to account for the fact
+        // that the catId-sortOrder (cso) was added after the catId functionality
+        // already existed, and to make sure that the relationship between catIds
+        // and cso is sync'd.  This might not be necessary later...
+        
+        if(arrPortcats.length === 0) return [];
+        const cso = arrCso;
+
+
+        arrPortcats.forEach((catId) => {
+            const csoIdx = cso.findIndex((thisCso) => {
+                return catId+'' === thisCso.catId+''
+            })
+
+            // didn't find this guy in the cso array, shove him in
+            if(csoIdx === -1) {
+                cso.push({
+                    catId: catId,
+                sortOrder: -1
+                })
+            }
+        })
+        return cso;
     }
 
 
@@ -188,6 +251,7 @@ class PortfolioEditForm extends React.Component {
             createDate: this.state.createDate,
             githubUrl: this.state.githubUrl,
             auxImgs: this.state.auxImgs || [],
+            cso: this.state.cso || [],
             lastUpdated: moment().valueOf()
         });
         this.setState({

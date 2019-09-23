@@ -17,7 +17,7 @@ const PortfolioRail = (props) => {
           const settings = {
             dots: false,
             infinite: true,
-            speed: 500,
+            speed: 2000,
             slidesToScroll: 1,
             centerMode: false,
             ladyLoad: true,
