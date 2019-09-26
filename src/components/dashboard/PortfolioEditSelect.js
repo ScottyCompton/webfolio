@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import portcats from '../fixtures/portcats'
-// import { connect } from 'react-redux'
 import uuid from 'uuid';
 import MessageModal from './MessageModal';
 import {Accordion, useAccordionToggle} from 'react-bootstrap';

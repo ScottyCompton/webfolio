@@ -1,6 +1,6 @@
 import React from 'react';
-import { firebase } from 'firebase/firebase';
-import { history } from 'routers/AppRouter';
+import { firebase } from '../../firebase/firebase';
+import { history } from '../../routers/AppRouter';
 import moment from 'moment';
 import PortCatSelect from './PortCatSelect';
 import { camelCase } from 'lodash';

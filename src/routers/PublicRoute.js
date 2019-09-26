@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import PortfolioItemLightbox from 'components/PortfolioItemLightbox';
-import SiteTitle from 'components/SiteTitle';
+import SiteTitle from '../components/SiteTitle';
 
 export const PublicRoute = ({ 
     isAuthenticated, 
@@ -10,9 +9,8 @@ export const PublicRoute = ({
     ...rest
 }) => (
     <Route {...rest} component={(props) => (
-        <div>
+        <div className="page">
             <SiteTitle />
-            <PortfolioItemLightbox />
             <Component {...props} />
         </div>
         // isAuthenticated ? (

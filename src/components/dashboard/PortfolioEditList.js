@@ -1,11 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import uuid from 'uuid';
-//import { startRemovePortfolioItem } from 'actions/portfolio-items';
-import portcats from 'fixtures/portcats';
+import portcats from '../../fixtures/portcats';
 import PortfolioEditListItem from './PortfolioEditListItem';
 import { Link } from 'react-router-dom';
 
-import update from 'immutability-helper';
 
 const PortfolioEditList = (props) => {
 

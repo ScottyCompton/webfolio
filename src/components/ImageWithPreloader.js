@@ -1,5 +1,5 @@
 import React from 'react';
-import PreloadImage from 'components/PreloadImage';
+import PreloadImage from '../components/PreloadImage';
 
 
 const ImageWithPreloader = (props) => {

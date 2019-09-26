@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startUpdateSiteSettings } from 'actions/site-settings';
+import { startUpdateSiteSettings } from '../../actions/site-settings';
 import { camelCase } from 'lodash';
 import AdminMessageModal from './AdminMessageModal';
 import ImageUploader from './ImageUploader';
 import { Tabs, Tab, TabList, TabPanel } from 'react-tabs';
 import uuid from 'uuid';
 import { Link } from 'react-router-dom';
-import { firebase } from 'firebase/firebase';
+import { firebase } from '../../firebase/firebase';
 
 
 

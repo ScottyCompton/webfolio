@@ -11,9 +11,6 @@ import SliderArrow from './SliderArrow';
 const PortfolioRail = (props) => {
     
         const portItems = props.portfolio;
-
-        
-
           const settings = {
             dots: false,
             infinite: true,
@@ -68,6 +65,7 @@ const PortfolioRail = (props) => {
             ]
           };    
 
+
         return (
             portItems.length > 0 &&
             <div className="portfolio-rail">
@@ -75,7 +73,7 @@ const PortfolioRail = (props) => {
                 <Slider {...settings}>
                     {portItems.map((item) => {
                         return (
-                            <PortRailItem onClickShowPortfolioItem={props.onClickShowPortfolioItem} data={item} key={uuid()} />
+                            <PortRailItem data={item} key={uuid()} />
                         )
                     })}
                 </Slider>

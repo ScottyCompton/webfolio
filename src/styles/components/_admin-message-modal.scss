@@ -1,7 +1,3 @@
-body.ReactModal__Body--open {
-    overflow: hidden;
-}
-
 .MessageModal__Content {
     color: white;
     width: 40%;
@@ -51,4 +47,8 @@ body.ReactModal__Body--open {
     .modal-btn {
         margin-left: 10px;
     }
+}
+
+body.ReactModal__Body--open {
+    overflow: hidden;
 }

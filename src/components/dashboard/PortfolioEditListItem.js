@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 //import { Button } from 'react-bootstrap';
-import portcats from 'fixtures/portcats';
+import portcats from '../../fixtures/portcats';
 import uuid from 'uuid';
-import ImageWithPreloader from 'components/ImageWithPreloader';
+import ImageWithPreloader from '../../components/ImageWithPreloader';
 //import { useDrag, useDrop } from 'react-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faSortUp, faEdit, faTrash, faSortDown} from '@fortawesome/free-solid-svg-icons'

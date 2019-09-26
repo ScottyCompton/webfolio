@@ -1,0 +1,90 @@
+.Portfolio-Item {
+    width: 100%;
+}
+
+.Portfolio-Item__Container {
+    border: 2px solid $gray-400;
+    border-radius: 5px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    padding: 0 3%;
+}
+
+.Portfolio-Item__Head {
+    width: 100%;
+    display: flex;
+    position: relative;
+    border-bottom: 2px solid $gray-400;
+}
+
+.Portfolio-Item__Logo {
+    width: 25%;
+    position: relative;
+    float: left;
+    img {
+        width: 100%;
+        height: auto;
+        top: 0;
+        left: 0;
+    }
+}
+
+.Portfolio-Item__Logo--container {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.Portfolio-Item__Logo--img {
+    width: 100%;
+    position: absolute;
+    height: 0;
+    top: 0;
+    padding-top: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: 50%;
+    margin-right: 10%;
+}
+
+.Portfolio-Item__Summary {
+    padding: 3% 0px 0 3%;
+    width: 75%;
+}
+
+.Potfolio-Item__Content {
+    width: 100%;
+}
+
+.Portfolio-Item__Subdetails {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .Portfolio-Item__Subdetail {
+        width: 100%;
+        display: flex;
+        .Subdetail_left {
+            width: 25%;
+            text-align: right;
+            padding: 3px;
+        }
+        .Subdetail_right {
+            width: 75%;
+            text-align: left;
+            padding: 3px;
+        }
+    }
+}
+
+.Portfolio-Item__Portcats {
+    text-align: right;
+    color: $gray-300;
+    padding: 10px 0;
+}
+
+.section-content {
+    padding-bottom: 40px;
+}

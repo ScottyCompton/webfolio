@@ -1,5 +1,5 @@
 import React from 'react'
-import { startAddPortfolioItem, startUpdatePortfolioItem } from 'actions/portfolio-items';
+import { startAddPortfolioItem, startUpdatePortfolioItem } from '../../actions/portfolio-items';
 import PortfolioEditForm from './PortfolioEditForm';
 import { connect } from 'react-redux';
 

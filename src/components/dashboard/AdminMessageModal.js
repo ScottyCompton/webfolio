@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import messageModalData from 'fixtures/messageModalData';
+import messageModalData from '../../fixtures/messageModalData';
 import ReactModal from 'react-modal';
 import uuid from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

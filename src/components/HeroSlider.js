@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import Slider from 'react-slick';
 import uuid from 'uuid';
-//import {Row, Col, Container} from 'react-bootstrap';
-
+import { connect } from 'react-redux';
 
 class HeroSlider extends React.Component {
     constructor(props) {
@@ -80,19 +79,23 @@ class HeroSlider extends React.Component {
             swipeToSlide: false,        
         };    
 
-        // if(windowState === '') {
-        //     const x = getWindowState();
-        //     setWindowState(x);  
-        // }
 
         const slides = [];
+        let foregroundImg;
 
-        for(var i = 1; i <= 6; i++) {
-            slides.push(`/images/heroslider/slide${i}_${this.state.windowState}.jpg`);
-        }
+        this.props.sliderImgs.forEach((img) => {
+            if(img.orientation === this.state.windowState) {
+                if(img.isForeground) {
+                    foregroundImg = img.src;
+                } else {
+                    slides.push(img.src);
+                }
+            }
+        });
+
 
         const foregroundStyle = {
-            backgroundImage: `url(/images/heroslider/foreground_${this.state.windowState}.png)`
+            backgroundImage: `url(${foregroundImg})`
         }
 
         return (
@@ -101,7 +104,7 @@ class HeroSlider extends React.Component {
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
                         <div className="heroslider-container trans-on-resize">
                             <div className={`heroslider-${this.state.windowState}`}>
-                                <div className="heroslider__foreground trans-on-resize" style={foregroundStyle}></div>
+                                {foregroundImg && <div className="heroslider__foreground trans-on-resize" style={foregroundStyle}></div>}
                                 <div className="heroslider__background trans-on-resize hide-on-resize">
                                     <Slider {...settings}>
                                         {slides.map((slide) => {
@@ -121,4 +124,14 @@ class HeroSlider extends React.Component {
 
 }
 
-export default HeroSlider;
+
+
+const mapStateToProps = (state, props) => {
+    return {
+        sliderImgs: state.siteSettings.sliderImgs
+    }
+}
+
+
+
+export default connect(mapStateToProps)(HeroSlider);

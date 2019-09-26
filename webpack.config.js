@@ -16,10 +16,7 @@ module.exports = (env) => {
 
     return {
         resolve: {
-            modules: [
-                path.resolve('./src'),
-                path.resolve('./node_modules')
-            ]
+            modules: [path.join(__dirname, 'src', 'js'), 'node_modules'],
         },
         entry: ['babel-polyfill', './src/app.js'],
         output: {

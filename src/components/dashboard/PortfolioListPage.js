@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import PortfolioEditList from './PortfolioEditList';
-import { startRemovePortfolioItem, startUpdatePortfolioItem } from 'actions/portfolio-items';
-import { listByCategory } from 'actions/admin-portfolio-list-filter';
-import portfolioListFilter from 'selectors/portfolio-list-filter';
+import { startRemovePortfolioItem, startUpdatePortfolioItem } from '../../actions/portfolio-items';
+import { listByCategory } from '../../actions/admin-portfolio-list-filter';
+import portfolioListFilter from '../../selectors/portfolio-list-filter';
 import AdminMessageModal from  './AdminMessageModal';
 //import { DndProvider } from 'react-dnd'
 //import HTML5Backend from 'react-dnd-html5-backend'

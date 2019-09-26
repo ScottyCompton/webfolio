@@ -1,10 +1,10 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import authReducer from 'reducers/auth';
-import portfolioItemsReducer from 'reducers/portfolio-items';
-import primLightboxReducer from 'reducers/portfolio-item-lightbox';
-import admListFilterReducer from 'reducers/admin-portfolio-list-filter';
-import settingsReducer from 'reducers/site-settings';
+import authReducer from '../reducers/auth';
+import portfolioItemsReducer from '../reducers/portfolio-items';
+import admListFilterReducer from '../reducers/admin-portfolio-list-filter';
+import settingsReducer from '../reducers/site-settings';
+
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -15,7 +15,6 @@ export default () => {
         combineReducers({
             auth: authReducer,
             portfolio: portfolioItemsReducer,
-            primLightbox: primLightboxReducer,
             admListFilter: admListFilterReducer,
             siteSettings: settingsReducer
         }),

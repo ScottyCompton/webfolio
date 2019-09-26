@@ -1,26 +1,4 @@
-/* KNOWN ISSUES 
 
-#########################################################    
-/node_modules/react-overlays/Dropdown.js line 16:
-#########################################################    
-
-        change this:
-    16    //var _uncontrollable = _interopRequireDefault(require("uncontrollable"));
-
-        to this:
-    16    var _uncontrollable = _interopRequireDefault(require("uncontrollable").uncontrollable);
-
-#########################################################    
-/node_modules/react-preload-image/index.js,  line 66:
-#########################################################    
-
-        change this:
-    66       this.preloader.onload = null;
-
-        to this:
-    66      if(this.preloader) this.preloader.onload = null;
-
-*/
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -29,7 +7,7 @@ import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import { login, logout } from './actions/auth';
 import { startGetPortfolioItems } from './actions/portfolio-items';
-import { startGetSiteSettings } from 'actions/site-settings';
+import { startGetSiteSettings } from './actions/site-settings';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';

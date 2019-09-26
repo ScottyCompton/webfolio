@@ -1,5 +1,5 @@
 import React from 'react';
-import { firebase } from 'firebase/firebase';
+import { firebase } from '../../firebase/firebase';
 import FileUploader from 'react-firebase-file-uploader';
 
 
