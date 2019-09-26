@@ -3,3 +3,17 @@
     margin-bottom: 30px;
     text-align: right;
 }
+
+.admin-page-title {
+    margin-bottom: 20px;
+}
+
+.admin-page-subtitle {
+    margin-top: 20px;
+}
+
+.btn-img-uploader {
+    &:hover {
+        text-decoration: underline;
+    }
+}

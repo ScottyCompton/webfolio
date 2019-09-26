@@ -4,9 +4,10 @@ import PortfolioEditList from './PortfolioEditList';
 import { startRemovePortfolioItem, startUpdatePortfolioItem } from 'actions/portfolio-items';
 import { listByCategory } from 'actions/admin-portfolio-list-filter';
 import portfolioListFilter from 'selectors/portfolio-list-filter';
-import MessageModal from  './MessageModal';
+import AdminMessageModal from  './AdminMessageModal';
 //import { DndProvider } from 'react-dnd'
 //import HTML5Backend from 'react-dnd-html5-backend'
+
 
 export class PortfolioListPage extends React.Component {
     constructor(props) {
@@ -22,11 +23,11 @@ export class PortfolioListPage extends React.Component {
         this.props.listByCategory({catId});
     }
 
-    handleDelete = (id, currIdx) => {
+    handleDelete = (id) => {
         this.props.startRemovePortfolioItem({id})
     }
 
-    doRedorder(id, currIdx, dir) {
+    doRedorder(currIdx, dir) {
         //move item up in the list (make sortOrder smaller)
         // or move item down the list (make sortOrder larger)
         const catId = this.props.catId;
@@ -40,29 +41,35 @@ export class PortfolioListPage extends React.Component {
             updateList.splice(currIdx + 1, 0, itemToMove);
         }
 
-        updateList.forEach((item, idx) => {
+        updateList.forEach((item, idx) => {            
              const csoList = item.cso 
             //     // an array of objects expressed as
             //     // {catId: xxx, sortOrder: nnn}
-            const csoItemIdx = csoList.findIndex((c) => {
-                return c.catId+'' === catId+''
-            })
-
-             if(csoItemIdx !== -1) {
-                 csoList[csoItemIdx].sortOrder = idx;
-                item.cso = csoList
-             }
-            this.props.startUpdatePortfolioItem(item.id, item)
+            if(csoList !== undefined) {
+                const csoItemIdx = csoList.findIndex((c) => {
+                    return c.catId !== undefined ? c.catId+'' === catId+'' : false;
+                })
+    
+                 if(csoItemIdx !== -1) {
+                     csoList[csoItemIdx].sortOrder = idx;
+                    item.cso = csoList
+                 }
+                this.props.startUpdatePortfolioItem(item.id, item)
+            } else {
+                // i wanna fuckin' know about it...
+                alert('category-sortorder id array for ' + item.projectTitle + ' is undefined!');
+            }
+          
         }) 
     }
 
 
     handleMoveUp = (id, currIdx) => {
-        this.doRedorder(id, currIdx, 'up')
+        this.doRedorder(currIdx, 'up')
     }
 
     handleMoveDown = (id, currIdx) => {
-        this.doRedorder(id, currIdx, 'down')
+        this.doRedorder(currIdx, 'down')
     }
 
     confirmDelete = (e) => {
@@ -71,11 +78,10 @@ export class PortfolioListPage extends React.Component {
         this.closeMsgModal();
     }
 
-    showModal = (e) => {
-        e.preventDefault();
+    showModal = (portfolioId) => {
         this.setState({
             showModal: true,
-            portfolioId: e.target.getAttribute('data-id')
+            portfolioId: portfolioId
         });
     }
 
@@ -90,11 +96,13 @@ export class PortfolioListPage extends React.Component {
     render() {
         return (
             <div>
-            <MessageModal 
+            <AdminMessageModal 
                 onHide={this.closeMsgModal} 
                 onConfirm={this.confirmDelete} 
                 show={this.state.showModal} 
-                type="INFO" 
+                confirmBtnText="Yes, Delete this item."
+                closeBtnText="Cancel & Exit"
+                type="INFODELETE" 
                 message="Are you certain you want to delete this portfolio item?"
                 />            
                     <PortfolioEditList 

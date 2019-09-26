@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import AdminHeader from 'components/dashboard/AdminHeader';
 import AdminFooter from 'components/dashboard/AdminFooter';
+import SiteTitle from 'components/SiteTitle';
 
 export const PrivateRoute = ({ 
     isAuthenticated, 
@@ -11,7 +12,8 @@ export const PrivateRoute = ({
 }) => (
     <Route {...rest} component={(props) => (
         isAuthenticated ? (
-            <div>
+            <div className="page">
+                <SiteTitle pageTitle="Webfolio Admin - " />
                 <AdminHeader />
                     <div className="shell">
                         <Component {...props} />
@@ -19,7 +21,10 @@ export const PrivateRoute = ({
                 <AdminFooter />
             </div>
         ) : (
-            <Redirect to="/dashboard/login" />
+            <div className="page">
+                <SiteTitle pageTitle="Webfolio Admin Login " />
+                <Redirect to="/dashboard/login" />
+            </div>
         )
     )} />
 );

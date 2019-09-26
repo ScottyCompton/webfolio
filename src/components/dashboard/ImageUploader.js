@@ -4,7 +4,7 @@ import FileUploader from 'react-firebase-file-uploader';
 
 
 
-class PorfolioImageUploader extends React.Component {
+class ImageUploader extends React.Component {
     constructor(props) {
         super(props);
 
@@ -60,9 +60,7 @@ class PorfolioImageUploader extends React.Component {
         .then(() =>{
             const {previousImg} = this.props;
             if(previousImg) {
-                console.log('previousImg = ', previousImg)
                 const imgNameRight = previousImg.split('%2F').pop(); // everything after %2f
-                console.log('imgNameRight = ', imgNameRight)
                 const imgName = imgNameRight.split('?').shift() // everything before ?
                 // imgName should be 8wjseysfas-fkdfysdf3.jpg or something similar
                 console.log(imgName);
@@ -123,11 +121,11 @@ class PorfolioImageUploader extends React.Component {
         return (
             <div>
                 {this.state.isUploading && 
-                <div className="progress" style={{marginBottom: "10px", height:"0.2rem"}}>
+                <div className="progress" style={{height:"0.2rem"}}>
                     <div className="progress-bar bg-success" role="progressbar" style={{width: `${this.state.progress}%`,  height:"0.2rem"}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>}
-                {!this.state.isUploading && <div style={{width: "100%", height: "0.2rem", marginBottom: "10px"}}></div>}
-                <label className="btn btn-primary">{this.props.btnText}
+                {!this.state.isUploading && <div style={{width: "100%", height: "0.2rem"}}></div>}
+                <label className="btn no-padding btn-img-uploader float-right">{this.props.btnText}
                 <FileUploader
                     ref={instance => { this.fileUploader = instance; } }
                     {...fbuProps}
@@ -137,4 +135,4 @@ class PorfolioImageUploader extends React.Component {
     }
 }
 
-export default PorfolioImageUploader;
+export default ImageUploader;

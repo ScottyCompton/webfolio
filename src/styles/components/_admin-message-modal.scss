@@ -1,0 +1,54 @@
+body.ReactModal__Body--open {
+    overflow: hidden;
+}
+
+.MessageModal__Content {
+    color: white;
+    width: 40%;
+    max-width: 800px;
+    min-width: 400px;
+    position: absolute;
+    margin-top: 10vh;
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    top: -10vh;
+    transition: all 0.2s ease-in;
+}
+
+.MessageModal__Content--after-open {
+    top: 10vh;
+}
+
+.MessageModal__Content--before-close {
+    top: -10vh;
+}
+
+.MessageModal__Overlay {
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    opacity: 1;
+    transition: all 0.2s ease-in;
+    background: rgba(0, 0, 0, 0);
+}
+
+.MessageModal__Overlay--after-open {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.MessageModal__Overlay--before-close {
+    background: rgba(0, 0, 0, 0);
+}
+
+.MessageModal__buttons {
+    margin-top: 40px;
+    padding-bottom: 40px;
+    .modal-btn {
+        margin-left: 10px;
+    }
+}

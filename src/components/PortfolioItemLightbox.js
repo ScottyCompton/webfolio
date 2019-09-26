@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {unloadLightbox, hideLightbox } from '../actions/portfolio-item-lightbox';
-import {Row, Col, Container } from 'react-bootstrap';
+//import {Row, Col, Container } from 'react-bootstrap';
 import uuid from 'uuid';
 import Slider from 'react-slick';
-import ImageWithPreloader from './ImageWithPreloader';
-import SliderArrow from './SliderArrow';
-import breakpoints from '../fixtures/bootstrapBreakpoints';
+//import ImageWithPreloader from './ImageWithPreloader';
+//import SliderArrow from './SliderArrow';
+//import breakpoints from '../fixtures/bootstrapBreakpoints';
 
 class PortfolioItemLightbox extends React.Component {
     constructor(props) {
@@ -21,17 +21,7 @@ class PortfolioItemLightbox extends React.Component {
     
         window.addEventListener('resize', (e) => {this.handleResize(e)});
     }
-    // const [currentBreakpoint, setCurrentBreakpoint] = useState(getCurrent())
-
-    // window.addEventListener('resize', (e) => {handleResize(e)});
-
-    // const handleResize = (e) => {
-    //     const bp = getCurrent();
-    //     if(currentBreakpoint.name !== bp.name) {
-    //         setCurrentBreakpoint(bp.name)
-    //     }
-    // }
-
+   
 
 
     handleResize = (e) => {
@@ -91,9 +81,9 @@ class PortfolioItemLightbox extends React.Component {
 
             <div className={`prim-container prim-container${lightboxClass}`}>
                 <div className={`prim-content-wrapper prim-content-wrapper${lightboxClass}`}>
-                    <Container>
-                        <Row>
-                            <Col>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-xs-12 col-sm-12 col-md-12-col-lg-12">
                                 <div className="prim-content">
                                     <div className="prim-slider-outer">
                                         <div className="prim-slider-inner">
@@ -132,9 +122,9 @@ class PortfolioItemLightbox extends React.Component {
                                           </div>                            
                                     </div>                                
                                 </div>
-                            </Col>
-                        </Row>
-                    </Container>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className={`prim-overlay prim-overlay${lightboxClass}`}></div>
             </div>

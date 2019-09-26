@@ -7,7 +7,7 @@
     position: relative;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    //justify-content: space-between;
     flex-wrap: wrap;
 }
 
@@ -21,6 +21,6 @@
     }
 }
 
-.portfolio-edit-select__group:last-child {
-    margin-right: auto;
-}
+// .portfolio-edit-select__group:last-child {
+//     margin-right: auto;
+// }

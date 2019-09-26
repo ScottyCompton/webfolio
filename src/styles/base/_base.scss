@@ -25,13 +25,13 @@ $s-size: 1.2rem;
 $m-size: 1.6rem;
 $l-size: 3.2rem;
 $xl-size: 4.8rem;
-//
-// media queries
-//
-$desktop-breakpoint: 45rem;
-//
-// backgrounds
-//
+// //
+// // media queries
+// //
+// $desktop-breakpoint: 45rem;
+// //
+// // backgrounds
+// //
 .bg-white {
     background: $off-white;
 }
@@ -43,24 +43,9 @@ $desktop-breakpoint: 45rem;
     float: left;
 }
 
-.portfolio-slider-arrow.slick-arrow.slick-prev,
-.portfolio-slider-arrow.slick-arrow.slick-next {
-    width: 2.0rem;
-    height: 4.0rem;
-    color: $gray-600;
-    transition: all 300ms ease-in;
-    &:hover {
-        color: #fff;
-    }
-    svg {
-        width: 2.0rem;
-        height: 4.0rem;
-    }
-}
-
-.slick-next:before,
-.slick-prev:before {
-    display: none;
+.home-page {
+    display: flex;
+    flex-direction: column;
 }
 
 label.btn {

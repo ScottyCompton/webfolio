@@ -4,6 +4,7 @@ import uuid from 'uuid';
 import PortfolioRail from './PortfolioRail';
 import { connect } from 'react-redux';
 import portfolioListFilter from 'selectors/portfolio-list-filter'
+//import {Container, Row, Col} from 'react-bootstrap';
 
 
 
@@ -15,7 +16,9 @@ class PortCatRails extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
+            <div className="row">
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 white-text">
                 {
                     portcats.map((cat) => {
                         // const portfolioByCat = this.props.portfolio.filter((item) => {     
@@ -29,6 +32,8 @@ class PortCatRails extends React.Component {
                         )
                     })
                 }
+                </div>
+            </div>
             </div>
         );        
     }

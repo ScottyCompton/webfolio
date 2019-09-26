@@ -4,7 +4,7 @@ import authReducer from 'reducers/auth';
 import portfolioItemsReducer from 'reducers/portfolio-items';
 import primLightboxReducer from 'reducers/portfolio-item-lightbox';
 import admListFilterReducer from 'reducers/admin-portfolio-list-filter';
-
+import settingsReducer from 'reducers/site-settings';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -16,7 +16,8 @@ export default () => {
             auth: authReducer,
             portfolio: portfolioItemsReducer,
             primLightbox: primLightboxReducer,
-            admListFilter: admListFilterReducer
+            admListFilter: admListFilterReducer,
+            siteSettings: settingsReducer
         }),
         composeEnhancers(applyMiddleware(thunk))
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faChevronRight, faChevronLeft, faCoffee} from '@fortawesome/free-solid-svg-icons'
+import {faChevronRight, faChevronLeft} from '@fortawesome/free-solid-svg-icons'
 
 
 const SliderArrow = (props) => {

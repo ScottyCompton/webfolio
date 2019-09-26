@@ -9,6 +9,7 @@ import EditPortfolioItemPage from 'components/dashboard/EditPortfolioItemPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import LoginPage from 'components/dashboard/LoginPage';
+import SiteSettingsPage from 'components/dashboard/SiteSettingsPage';
 
 export const history = createBrowserHistory();
 
@@ -27,6 +28,7 @@ return (
             <div>
               <Route path={`${url}/login`} component={LoginPage} exact={true} />
               <PrivateRoute path={`${url}/`} component={DashboardPage} exact />
+              <PrivateRoute path={`${url}/settings`} component={SiteSettingsPage} exact />
               <PrivateRoute path={`${url}/portfolio`} component={PortfolioListPage} exact={true} />
               <PrivateRoute path={`${url}/portfolio/edit/:id`} component={EditPortfolioItemPage} exact={true} />
               <PrivateRoute path={`${url}/portfolio/create`} component={EditPortfolioItemPage} exact={true} />

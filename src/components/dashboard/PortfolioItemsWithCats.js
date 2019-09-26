@@ -10,9 +10,7 @@ class PortfolioItemsWithCats extends React.Component  {
     }
 
     render() {
-
-        return (
-
+        const toDisplay = (
             portcats.map((cat) => {
                 let catId = cat.id;
                 let catName = cat.name;
@@ -40,7 +38,11 @@ class PortfolioItemsWithCats extends React.Component  {
                     
                 )
             })            
+            
+        );
 
+        return (
+            <div className="portfolio-edit-select__container">{toDisplay}</div>
         )
 
     }

@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+//import { Button } from 'react-bootstrap';
 import portcats from 'fixtures/portcats';
 import uuid from 'uuid';
 import ImageWithPreloader from 'components/ImageWithPreloader';
-import { useDrag, useDrop } from 'react-dnd';
+//import { useDrag, useDrop } from 'react-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faSortUp, faEdit, faTrash, faSortDown, faCaretRight} from '@fortawesome/free-solid-svg-icons'
+import {faSortUp, faEdit, faTrash, faSortDown} from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -24,21 +24,21 @@ const PortfolioEditListItem = (
 
     const handleClickMoveUp = (e) => {
         e.preventDefault();
-        const id = e.target.getAttribute('data-id');
+        const id = portfolioItem.id;
         handleMoveUp(id, currIdx);
     }
 
 
     const handleClickMoveDown = (e) => {
         e.preventDefault();
-        const id = e.target.getAttribute('data-id');
+        const id = portfolioItem.id;
         handleMoveDown(id, currIdx);
     }
 
 
     const handleClickDelete = (e) => {
         e.preventDefault();
-        const id = e.target.getAttribute('data-id');
+        const id = portfolioItem.id;
         handleDelete(id);
     }
 
@@ -60,13 +60,13 @@ const PortfolioEditListItem = (
             <div className="portfolio-list__list-item-cats">{cats.length !== 0 && cats.map((cat) => (<span key={uuid()}>{cat}</span>))}</div>
             <div className="portfolio-list__list-item-btns">
                 <Link to={`/dashboard/portfolio/edit/${portfolioItem.id}`}><FontAwesomeIcon size="lg" icon={faEdit} /></Link>
-                <Link to="/" data-id={portfolioItem.id} onClick={handleClickDelete}><FontAwesomeIcon size="lg" icon={faTrash} /></Link>
+                <Link to="/" onClick={handleClickDelete}><FontAwesomeIcon size="lg" icon={faTrash} /></Link>
                 {canReorder && 
                     <span>
                         {firstItem && <span className="portfolio-list__list-item-btns--moveup portfolio-list__list-item-btns--disabled"><FontAwesomeIcon size="2x" icon={faSortUp} /></span>}
-                        {!firstItem && <Link to="/" data-id={portfolioItem.id} onClick={handleClickMoveUp} className="portfolio-list__list-item-btns--moveup"><FontAwesomeIcon size="2x" icon={faSortUp} /></Link>}
+                        {!firstItem && <Link to="/" onClick={handleClickMoveUp} className="portfolio-list__list-item-btns--moveup"><FontAwesomeIcon size="2x" icon={faSortUp} /></Link>}
                         {lastItem && <span className="portfolio-list__list-item-btns--movedn portfolio-list__list-item-btns--disabled"><FontAwesomeIcon size="2x" icon={faSortDown} /></span>}
-                        {!lastItem && <Link to="/" data-id={portfolioItem.id} onClick={handleClickMoveDown} className="portfolio-list__list-item-btns--movedn"><FontAwesomeIcon size="2x" icon={faSortDown} /></Link>}
+                        {!lastItem && <Link to="/" onClick={handleClickMoveDown} className="portfolio-list__list-item-btns--movedn"><FontAwesomeIcon size="2x" icon={faSortDown} /></Link>}
                     </span>
                 }
             </div>

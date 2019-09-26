@@ -1,22 +1,16 @@
 import React, {useState} from 'react';
 import Slider from 'react-slick';
 import uuid from 'uuid';
+//import {Row, Col, Container} from 'react-bootstrap';
 
 
-class HomePageSlider extends React.Component {
+class HeroSlider extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             windowState: this.getWindowState()
         }
     }
-
-    //const [windowState, setWindowState] = useState('');
-
-    // window.addEventListener('resize', (e) => {
-    //     this.handleResize(e);
-    // });
-
 
     componentDidMount() {
         window.addEventListener("resize", this.handleResize.bind(this));
@@ -94,25 +88,31 @@ class HomePageSlider extends React.Component {
         const slides = [];
 
         for(var i = 1; i <= 6; i++) {
-            slides.push(`/images/homeslider/slide${i}_${this.state.windowState}.jpg`);
+            slides.push(`/images/heroslider/slide${i}_${this.state.windowState}.jpg`);
         }
 
         const foregroundStyle = {
-            backgroundImage: `url(/images/homeslider/foreground_${this.state.windowState}.png)`
+            backgroundImage: `url(/images/heroslider/foreground_${this.state.windowState}.png)`
         }
 
         return (
-            <div className="homeslider-container trans-on-resize">
-                <div className={`homeslider-${this.state.windowState}`}>
-                    <div className="homeslider__foreground trans-on-resize" style={foregroundStyle}></div>
-                    <div className="homeslider__background trans-on-resize hide-on-resize">
-                        <Slider {...settings}>
-                            {slides.map((slide) => {
-                                return (
-                                    <img src={slide} key={uuid()} />
-                                )
-                            })}
-                        </Slider>
+            <div className="container-fluid no-padding">
+                <div className="row no-padding">
+                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
+                        <div className="heroslider-container trans-on-resize">
+                            <div className={`heroslider-${this.state.windowState}`}>
+                                <div className="heroslider__foreground trans-on-resize" style={foregroundStyle}></div>
+                                <div className="heroslider__background trans-on-resize hide-on-resize">
+                                    <Slider {...settings}>
+                                        {slides.map((slide) => {
+                                            return (
+                                                <img src={slide} key={uuid()} />
+                                            )
+                                        })}
+                                    </Slider>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,4 +121,4 @@ class HomePageSlider extends React.Component {
 
 }
 
-export default HomePageSlider;
+export default HeroSlider;
