@@ -18,6 +18,11 @@ class PortCatRails extends React.Component {
             <div>
                 <div className="container">
                     <div className="row">
+                        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h1 className="text-warning home-section-title">My Portfolio</h1>
+                        </div>
+                    </div>
+                    <div className="row">
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 white-text">
                         {
                             portcats.map((cat) => {

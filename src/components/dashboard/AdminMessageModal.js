@@ -13,7 +13,7 @@ const AdminMessageModal = (props) => {
     message = '',
     onHide,
     onConfirm,
-    onSaveExit
+    onExitSave
   } = props;
 
 

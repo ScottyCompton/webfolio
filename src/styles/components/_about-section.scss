@@ -1,0 +1,27 @@
+.about-img {
+    width: 100%;
+    position: relative;
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.about-contact {
+    display: flex;
+    margin-top: 5vh;
+}
+
+.about-contact-block {
+    color: $gray-100;
+    font-size: 18px;
+    margin-right: 30px;
+    span {
+        padding: 3px;
+        margin-left: 5px;
+    }
+}
+
+.resume-url {
+    margin-top: 5vh;
+}

@@ -4,11 +4,19 @@ import React from 'react'
 
 const Footer = (props) => {
     return (
-        <div className="container no-padding app-footer">
+        <div className="container">
         <div className="row no-padding">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 white-text no-padding">
                 <footer>
-                    I am the footer... kooo kooo cha-choo...
+                    <div className="app-footer text-center">
+                        That's all, folks...
+                        <br /><br />
+                        Scott C. Lonis, a.k.a. Scotty Compton<br />
+                        Dallas, Texas and sometimes Jaco, Costa Rica<br/>
+                        (806)-503-9174 | scott.lonis@outlook.com
+
+                    </div>
+                    
                 </footer>
             </div>
         </div>

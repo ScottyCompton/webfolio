@@ -35,7 +35,12 @@ class PortfolioEditForm extends React.Component {
             msgModal: {
                 show: false,
                 type: 'INFO',
-                message: ''
+                message: '',
+                confirmBtnText: '',
+                closeBtnText: '',
+                onConfirm: undefined,
+                onExitSave: undefined,
+                onHide: this.closeMsgModal
             },
             isNew: !portfolioItem,
             newPreviewImgAdded: false,
@@ -161,10 +166,12 @@ class PortfolioEditForm extends React.Component {
             return false;
         }
         this.closeMsgModal();
-
+        const saveAndExit = this.state.saveAndExit;
         if (!this.state.newPreviewImgAdded) {
             this.doPostData();
-            this.doSuccessModal('The portfolio entry was successfully saved');
+            if(!saveAndExit) {
+                this.doSuccessModal('The portfolio entry was successfully saved');
+            }
         } else {
             this.setState({
                 execPostFromUpload: true,
@@ -172,7 +179,6 @@ class PortfolioEditForm extends React.Component {
             })
         }
 
-        const saveAndExit = this.state.saveAndExit;
         if(saveAndExit) {
             history.push('/dashboard/portfolio');
         }
@@ -218,7 +224,15 @@ class PortfolioEditForm extends React.Component {
     }
 
     doSuccessModal = (message) => {
-        this.doMsgModal('SUCCESS', message);
+        this.setState({
+            msgModal: {
+            message: message,
+            type: 'SUCCESS',
+            show: true,
+            closeBtnText: 'OK',
+            onConfirm:undefined,
+            onHide: this.closeMsgModal,                
+        }})
     }
 
     doInfoModal = (message) => {
@@ -242,9 +256,7 @@ class PortfolioEditForm extends React.Component {
         this.setState(
             {
                 msgModal: {
-                    type: 'INFO',
-                    show: false,
-                    message: ''
+                    show: false
                 }
             }
         )
@@ -276,7 +288,16 @@ class PortfolioEditForm extends React.Component {
     doConfirmExit = (e) => {
         const isDirty = this.state.isDirty;
         if (isDirty) {
-            this.doInfoModal('You have unsaved changes. Leave without saving your changes?');
+            this.setState({
+                msgModal: {
+                message: "You have unsaved changes.  Are you sure you want to exit?",
+                type: 'INFO',
+                show: true,
+                closeBtnText: 'Cancel',
+                onConfirm:this.onExitConfirm,
+                onHide: this.closeMsgModal,     
+                onExitSave: this.onSaveExit          
+            }})
             
         } else {
             this.onExitConfirm(e);
@@ -295,7 +316,6 @@ class PortfolioEditForm extends React.Component {
         
 
     }
-
     
     onExitConfirm = (e) => {
         history.push('/dashboard/portfolio');
@@ -309,24 +329,31 @@ class PortfolioEditForm extends React.Component {
 
 
     doConfirmDelAuxImg = (e) => {
+        e.preventDefault();
         const idx = e.target.getAttribute('data-idx');
         const previousAuxImg = this.state.auxImgs[idx];
-
         this.setState({
             previousAuxImg,
-            modalConfirm: this.handleDelAuxImg,
-            modalCancel: this.handleCancelDelAuxImg
-        });
-        this.doInfoModal('Are you sure you want to delete this slide image?');
+            msgModal: {
+            message: 'Are you sure you want to delete this image?',
+            type: 'INFODELETE',
+            show: true,
+            confirmBtnText: 'Yes Delete It',
+            closeBtnText: 'Cancel',
+            onConfirm: this.handleDelAuxImg,
+            onHide: this.handleCancelDelAuxImg,                
+        }})
     }
 
     handleCancelDelAuxImg = (e) => {
         this.closeMsgModal();
+        /*
         this.setState({
             modalConfirm: this.doConfirmExit,
             modalCancel: this.closeMsgModal,
             previousAuxImg: undefined
         });
+        */
     }
 
 
@@ -367,13 +394,15 @@ class PortfolioEditForm extends React.Component {
         return (
             <form id="form-portfolio" onSubmit={this.onSubmit}>
             <AdminMessageModal
-                onHide={this.closeMsgModal}
-                onConfirm={this.state.modalConfirm}
-                onSaveExit={this.state.modalOnSaveExit}
+                onHide={this.state.msgModal.onHide}
                 show={this.state.msgModal.show}
                 type={this.state.msgModal.type}
                 message={this.state.msgModal.message}
-            />
+                confirmBtnText={this.state.msgModal.confirmBtnText}
+                closeBtnText={this.state.msgModal.closeBtnText}
+                onConfirm={this.state.msgModal.onConfirm}
+                onExitSave={this.state.msgModal.onExitSave}
+            />            
             <div className="container">
                 <div className="row">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
@@ -479,7 +508,6 @@ class PortfolioEditForm extends React.Component {
                                             execPostFromUpload={this.state.execPostFromUpload}
                                             retrieveImgUrl={this.retrievePreviewImgUrl}
                                             doPostData={this.doPostData}
-                                            //onSubmit={this.doSubmit}
                                             showError={this.doErrorModal}
                                             showSuccess={this.showPreviewImgUploadSuccess}
                                         />

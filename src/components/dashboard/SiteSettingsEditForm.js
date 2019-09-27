@@ -23,6 +23,7 @@ class SiteSettingsEditForm extends React.Component {
             aboutTitle: settings.aboutTitle ? settings.aboutTitle : 'About Me',
             aboutBlurb: settings.aboutBlurb ? settings.aboutBlurb : '',
             aboutImg: settings.aboutImg ? settings.aboutImg : '',
+            resumeUrl: settings.resumeUrl ? settings.resumeUrl : '',
             facebookId: settings.facebookId ? settings.facebookId : '',
             twitterHandle: settings.twitterHandle ? settings.twitterHandle : '',
             linkedinUsername: settings.linkedinUsername ? settings.linkedinUsername : '',
@@ -271,6 +272,7 @@ class SiteSettingsEditForm extends React.Component {
             aboutTitle: this.state.aboutTitle,
             aboutBlurb: this.state.aboutBlurb,
             aboutImg: this.state.aboutImg,
+            resumeUrl: this.state.resumeUrl,
             facebookId: this.state.facebookId,
             twitterHandle: this.state.twitterHandle,
             linkedinUsername: this.state.linkedinUsername,
@@ -377,6 +379,19 @@ class SiteSettingsEditForm extends React.Component {
                                                     className="form-control"
                                                 />
                                             </div>
+
+
+                                            <div className="form-group">
+                                                <label htmlFor="resume-url">Resume URL</label>
+                                                <input
+                                                    id="resume-url"
+                                                    type="text"
+                                                    value={this.state.resumeUrl}
+                                                    onChange={this.onTextChange}
+                                                    className="form-control"
+                                                />
+                                            </div>
+
 
 
                                         </fieldset>

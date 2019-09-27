@@ -3,9 +3,10 @@ import ImageWithPreloader from './ImageWithPreloader';
 import { Link } from 'react-router-dom';
 
 const PortRailItem = (props) => {
+    
 
     const [infoClass, setInfoClass] = useState('');
-    const {id, projectTitle, shortDesc, propcats, previewImg, techSpecs, projectUrl, auxImgs} = props.data;    
+    const {id, projectTitle, shortDesc, previewImg, techSpecs, projectUrl, auxImgs} = props.data;    
     const hasAuxImgs = auxImgs && auxImgs.length > 0;
     const hasDetails = hasAuxImgs || projectUrl;
 

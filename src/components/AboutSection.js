@@ -1,18 +1,49 @@
 import React from 'react';
-//import {Row, Col, Container} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faAt, faMobileAlt} from '@fortawesome/free-solid-svg-icons'
 
 
-const AboutSection = () => {
+
+const AboutSection = (props) => {
+    const {aboutTitle, aboutBlurb, aboutImg, contactPhone, contactEmail, resumeUrl} = props.siteSettings;
+
 
     return (
         <div className="container">
         <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div>I am the about section</div>        
+                <h1 class="text-warning home-section-title">{aboutTitle}</h1>                
+            </div>
+            <div className="row">
+                <div className="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <div className="about-blurb">{aboutBlurb}</div>
+                    <div className="about-contact">
+                        <div className="about-contact-block"><FontAwesomeIcon icon={faAt}></FontAwesomeIcon><span className="text-warning">{contactEmail}</span></div>
+                        <div className="about-contact-block"><FontAwesomeIcon icon={faMobileAlt}></FontAwesomeIcon><span className="text-warning">{contactPhone}</span></div>
+                    </div>
+                    {resumeUrl && 
+                    <div className="resume-url text-white">
+                        Propsective Employers: <a href={resumeUrl} target="_blank">Click here to download my resume</a>
+                    </div>
+                    }
+                </div>
+                <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div className="about-img">
+                        <img src={aboutImg} />
+                    </div>
+                </div>
+
             </div>
         </div>
         </div>
     )
 }
 
-export default AboutSection;
+const mapStateToProps = (state, props) => {
+    return {
+        siteSettings: state.siteSettings
+    }
+}
+
+export default connect(mapStateToProps)(AboutSection);
