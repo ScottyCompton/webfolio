@@ -8,8 +8,6 @@ if(process.env.NODE_ENV === 'test') {
     require('dotenv').config({path: '.env.test'});
 } else if (process.env.NODE_ENV === 'development') {
     require('dotenv').config({path: '.env.development'});
-} else {
-    require('dotenv').config({path: '.env'});
 }
 
 module.exports = (env) => {
@@ -17,9 +15,6 @@ module.exports = (env) => {
     const CSSExtract = new ExtractTextPlugin('styles.css');
 
     return {
-        // resolve: {
-        //     modules: [path.join(__dirname, 'src', 'js'), 'node_modules'],
-        // },
         entry: ['babel-polyfill', './src/app.js'],
         output: {
             path: path.join(__dirname,'public','dist'),
