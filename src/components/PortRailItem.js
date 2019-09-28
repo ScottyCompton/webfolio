@@ -24,6 +24,7 @@ const PortRailItem = (props) => {
 
 	
 	const handleCloseWindowClick = (e) => {
+        e.preventDefault();
 		setInfoClass('');
 	}
 
@@ -41,13 +42,15 @@ const PortRailItem = (props) => {
                                 {techSpecs && <div><br />Technologies Used:<br /> {techSpecs}</div>}
                                 {hasDetails &&
                                     <div className="railItem__info--buttons">
-                                            {projectUrl && <span className="show-for-mobile"><a className="btn btn-outline-warning" onClick={handleLinkClick} href={projectUrl} target="_blank">Visit Website</a></span>}
-                                            {hasAuxImgs && <span className="show-for-mobile"><Link className="btn btn-outline-warning" to={`/portfolio/${id}`}>View Details</Link></span>}
-                                            {projectUrl && <span className="show-for-desktop"><a className="btn btn-outline-warning btn-sm" onClick={handleLinkClick} href={projectUrl} target="_blank">Visit Website</a></span>}
-                                            {hasAuxImgs && <span className="show-for-desktop"><Link className="btn btn-outline-warning btn-sm" to={`/portfolio/${id}`}>View Details</Link></span>}
+                                            {projectUrl && <span className="show-for-mobile"><a className="btn btn-outline-primary" onClick={handleLinkClick} href={projectUrl} target="_blank">Visit Website</a></span>}
+                                            {hasAuxImgs && <span className="show-for-mobile"><Link className="btn btn-outline-primary" to={`/portfolio/${id}`}>View Details</Link></span>}
+                                            {projectUrl && <span className="show-for-desktop"><a className="btn btn-outline-primary btn-sm" onClick={handleLinkClick} href={projectUrl} target="_blank">Visit Website</a></span>}
+                                            {hasAuxImgs && <span className="show-for-desktop"><Link className="btn btn-outline-primary btn-sm" to={`/portfolio/${id}`}>View Details</Link></span>}
                                     </div>                            
                                 }
-                                <div className="show-for-mobile railitem_close-button"><button className="btn btn-outline-warning" onClick={handleCloseWindowClick}> Close </button></div>
+                                <div className="show-for-mobile railitem_close-button">
+                                    <span><Link to="#close" className="btn btn-outline-primary" onClick={handleCloseWindowClick}> Close </Link></span>
+                                </div>
                              </div>    
                         </div>
                     </div>

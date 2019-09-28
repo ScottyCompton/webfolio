@@ -9,7 +9,7 @@ const Footer = (props) => {
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 white-text no-padding">
                 <footer>
                     <div className="app-footer text-center">
-                        That's all, folks...
+                        <span className="text-primary">That's all, folks...</span>
                         <br /><br />
                         Scott C. Lonis, a.k.a. Scotty Compton<br />
                         Dallas, Texas and sometimes Jaco, Costa Rica<br/>

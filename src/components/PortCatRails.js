@@ -19,7 +19,7 @@ class PortCatRails extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h1 className="text-warning home-section-title">My Portfolio</h1>
+                            <h1 className="text-primary home-section-title">My Past Works</h1>
                         </div>
                     </div>
                     <div className="row">
@@ -29,7 +29,7 @@ class PortCatRails extends React.Component {
                                 const portfolioByCat = portfolioListFilter(this.props.portfolio, {catId: cat.id});
                     
                                 return (
-                                    <PortfolioRail key={uuid()} portfolio={portfolioByCat} title={cat.name} catId={cat.id} />
+                                    (portfolioByCat.length >= 4) && <PortfolioRail key={uuid()} portfolio={portfolioByCat} title={cat.name} catId={cat.id} />
                                 )
                             })
                         }
