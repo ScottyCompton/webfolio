@@ -13,12 +13,6 @@ export const PublicRoute = ({
             <SiteTitle />
             <Component {...props} />
         </div>
-        // isAuthenticated ? (
-        //     <Redirect to="/dashboard" />
-        // ) : (
-        //     <PortfolioRailItemModal />
-        //     <Component {...props} />
-        // )
     )} />
 );
 

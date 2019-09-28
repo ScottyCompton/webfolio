@@ -6,7 +6,7 @@ import uuid from 'uuid';
 import Slider from 'react-slick';
 import SliderArrow from './SliderArrow';
 import GalleryTile from './GalleryTile';
-
+import { history } from '../routers/AppRouter';
 
 
 class PortfolioItemDetailsPage extends React.Component {
@@ -15,9 +15,28 @@ class PortfolioItemDetailsPage extends React.Component {
         this.state = {
             galleryMode: 'tile'
         }
+        
     }
 
-    toggleGalleryMode = (idx) => {
+
+    componentWillMount() {
+        window.scrollTo(0,0);
+    }
+
+
+    handleReturn = (e) => {
+        e.preventDefault();
+        const returnOffsetTop = localStorage.getItem('returnOffsetTop');
+        window.scrollTo({
+            top: returnOffsetTop,
+            behavior: 'smooth'
+        })
+        history.push('/');
+    }
+
+
+    toggleGalleryMode = (e, idx) => {
+        e.preventDefault();
         this.setState({
             galleryMode: this.state.galleryMode === 'tile' ? 'slideshow' : 'tile'
         })
@@ -31,8 +50,7 @@ class PortfolioItemDetailsPage extends React.Component {
 
     render() {
 
-
-
+    
         const sliderSettings = {
             dots: false,
             infinite: true,
@@ -177,10 +195,10 @@ class PortfolioItemDetailsPage extends React.Component {
 
                     <div className="row">
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                            <Link className="btn btn-outline-primary" to="/">Back To Porfolio</Link>
+                            <Link className="btn btn-outline-primary" onClick={this.handleReturn} to="/">Back To Porfolio</Link>
                         </div>
                     </div>
-                </div>            
+                </div>  
             </div>
         )
     }

@@ -27,6 +27,7 @@ const jsx = (
 let hasRendered = false;
 const renderApp = () => {
     if(!hasRendered) {
+        localStorage.removeItem('yPos');
         ReactDOM.render(jsx, document.getElementById('app'));
         hasRendered = true;
     } else {

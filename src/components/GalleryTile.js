@@ -5,8 +5,8 @@ import uuid from 'uuid';
 const GalleryTile = (props) => {
     const {handleClick, src, idx} = props;
 
-    const doHandleClick = () => {
-        handleClick(idx);
+    const doHandleClick = (e) => {
+        handleClick(e,idx);
     }
 
 

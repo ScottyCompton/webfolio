@@ -10,9 +10,9 @@ const AboutSection = (props) => {
 
     return (
         <div>
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                             <div className="are-you-hiring text-center">
                                 <div><b>Are you hiring? </b> Because I'm looking.  <a href={resumeUrl} target="_blank">Click here to download a copy of my resume.</a></div>
                             </div>
@@ -23,7 +23,7 @@ const AboutSection = (props) => {
                     <div className="about-section">
                         <div className="row">
                             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <h1 class="text-primary home-section-title">{aboutTitle}</h1>                
+                                <h1 className="text-primary home-section-title">{aboutTitle}</h1>                
                             </div>
                             <div className="row about-xs">
                                 <div className="col-xs-12 col-sm-9 col-md-9 col-lg-9">
