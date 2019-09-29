@@ -4,7 +4,14 @@ import React from 'react';
 
 const messageModalData = (props) => {
 
-    const {onHide, onConfirm, onExitSave, closeBtnText = 'Close', confirmBtnText = 'Leave Without Saving Changes', confirmSaveBtnText = 'Save & Exit'} = props;
+    const {onHide, 
+        dataIdx, 
+        onConfirm, 
+        onExitSave, 
+        closeBtnText = 'Close', 
+        confirmBtnText = 'Leave Without Saving Changes', 
+        confirmSaveBtnText = 'Save & Exit'
+    } = props;
 
     return {
         ERROR: {
@@ -61,7 +68,7 @@ const messageModalData = (props) => {
             textClass: "alert alert-info",
             buttons: [
                 <button  className="btn btn-primary float-right modal-btn btn-small" onClick={onHide}>{closeBtnText}</button>,
-                <button  className="btn btn-primary float-right modal-btn btn-small" onClick={onConfirm}>{confirmBtnText}</button>
+                <button  className="btn btn-primary float-right modal-btn btn-small" data-idx={dataIdx} onClick={onConfirm}>{confirmBtnText}</button>
             ]
         },
 

@@ -40,6 +40,7 @@ class PortfolioEditForm extends React.Component {
                 closeBtnText: '',
                 onConfirm: undefined,
                 onExitSave: undefined,
+                dataIdx: undefined,
                 onHide: this.closeMsgModal
             },
             isNew: !portfolioItem,
@@ -331,13 +332,15 @@ class PortfolioEditForm extends React.Component {
     doConfirmDelAuxImg = (e) => {
         e.preventDefault();
         const idx = e.target.getAttribute('data-idx');
-        const previousAuxImg = this.state.auxImgs[idx];
+        const auxImgs = this.state.auxImgs;
+        const previousAuxImg = auxImgs[idx];
         this.setState({
             previousAuxImg,
             msgModal: {
             message: 'Are you sure you want to delete this image?',
             type: 'INFODELETE',
             show: true,
+            dataIdx: idx,
             confirmBtnText: 'Yes Delete It',
             closeBtnText: 'Cancel',
             onConfirm: this.handleDelAuxImg,
@@ -359,10 +362,12 @@ class PortfolioEditForm extends React.Component {
 
     handleDelAuxImg = (e) => {
         e.preventDefault();
-
-        const { previousAuxImg } = this.state
-        if (previousAuxImg) {
-            const imgNameRight = previousAuxImg.split('%2F').pop(); // everything after %2f
+        const { auxImgs } = this.state;
+        const auxImgIdx = e.target.getAttribute('data-idx');
+        const auxImgToDelete = auxImgs[auxImgIdx];
+        
+        if (auxImgToDelete) {
+            const imgNameRight = auxImgToDelete.split('%2F').pop(); // everything after %2f
             const imgName = imgNameRight.split('?').shift() // everything before ?
             // imgName should be 8wjseysfas-fkdfysdf3.jpg or something similar
             firebase
@@ -376,14 +381,14 @@ class PortfolioEditForm extends React.Component {
                     console.log(`Could not delete ${imgName} because of the following error:`, err);
                 })
         }
-        const { auxImgs } = this.state;
-        const auxImgIdx = e.target.getAttribute('data-idx');
+        // const { auxImgs } = this.state;
+        // const auxImgIdx = e.target.getAttribute('data-idx');
         auxImgs.splice(auxImgIdx, 1)
         this.setState({
             auxImgs
         });
         this.doPostData();
-        this.handleCancelDelAuxImg(e);
+        //this.handleCancelDelAuxImg(e);
         setTimeout(() => {
             this.doSuccessModal('Slideshow Image successfully removed');
         }, 500)
@@ -402,11 +407,15 @@ class PortfolioEditForm extends React.Component {
                 closeBtnText={this.state.msgModal.closeBtnText}
                 onConfirm={this.state.msgModal.onConfirm}
                 onExitSave={this.state.msgModal.onExitSave}
+                dataIdx={this.state.msgModal.dataIdx}
             />            
             <div className="container">
                 <div className="row">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
-                        <h5 className="admin-page-title">{this.props.portfolioItem ? 'Edit Portfolio Item ' : 'Create New Portfolio Item'} {this.props.portfolioItem && <Link className="btn btn-secondary btn-small float-right" to="/dashboard/portfolio/create">Create New</Link>}</h5>
+                        <h5 className="admin-page-title">{this.props.portfolioItem ? 'Edit Portfolio Item ' : 'Create New Portfolio Item'} 
+                        {this.props.portfolioItem && <Link className="btn btn-secondary btn-small float-right" to="/dashboard/portfolio/create">Create New</Link>}
+                        {this.props.portfolioItem && <Link className="btn btn-success btn-small float-right" style={{marginRight: "10px"}} target="_blank" to={`/portfolio/${this.props.portfolioItem.id}`}>View In Browser</Link>}
+                        </h5>
                         
                     </div>
                 </div>
