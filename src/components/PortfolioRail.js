@@ -53,6 +53,7 @@ const PortfolioRail = (props) => {
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1,
+                        speed: 500,
                         arrows: false,
                         swipeToSlide: true,
                         centerMode: false
@@ -63,6 +64,7 @@ const PortfolioRail = (props) => {
                     settings: {
                         slidesToShow: 2,
                         slidesToScroll: 2,
+                        speed: 1000,
                         arrows: false,
                         swipeToSlide: true,
                         centerMode: false
@@ -74,6 +76,7 @@ const PortfolioRail = (props) => {
                     settings: {
                         slidesToShow: 3,
                         slidesToScroll: 3,
+                        speed: 1500,
                         arrows: true,
                         centerMode: false
                     }
@@ -83,6 +86,7 @@ const PortfolioRail = (props) => {
                     settings: {
                         slidesToShow: 4,
                         slidesToScroll:4,
+                        speed: 2000,
                         arrows: true,
                         swipeToSlide: false,
                         centerMode: false
