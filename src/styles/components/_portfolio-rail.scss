@@ -1,6 +1,7 @@
 .portfolio-rail {
     position: relative;
     width: 99%;
+    padding-bottom: 75px;
     @media screen and (min-width: $sm-breakpoint) {
         width: 100%;
     }

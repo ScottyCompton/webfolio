@@ -3,32 +3,59 @@
     padding-bottom: 40px;
 }
 
+.Portfolio-Item__Title {
+    display: none;
+    @media screen and (min-width: $md-breakpoint) {
+        display: block;
+    }
+    @media screen and (min-width: $lg-breakpoint) {
+        font-size: 3.0rem
+    }
+}
+
+.Portfolio-Item__Subtitle {
+    @media screen and (max-width: $xs-breakpoint) {
+        font-size: 1.5rem;
+    }
+}
+
 .Portfolio-Item__Title,
 .Portfolio-Item__Subtitle {
     font-family: 'Didact Gothic', sans-serif;
 }
 
 .Portfolio-Item__Container {
-    border: 2px solid $gray-400;
     border-radius: 5px;
-    margin-top: 40px;
     display: flex;
     flex-direction: column;
     margin-bottom: 40px;
-    padding: 0 3%;
+    @media screen and (min-width: $xs-breakpoint) {
+        margin-top: 40px;
+        padding: 0 3%;
+        border: 1px solid $gray-400;
+    }
 }
 
 .Portfolio-Item__Head {
     width: 100%;
     display: flex;
     position: relative;
-    border-bottom: 2px solid $gray-400;
+    padding: 5px 0;
+    flex-direction: column;
+    border-bottom: 1px solid $gray-400;
+    @media screen and (min-width: $xs-breakpoint) {
+        flex-direction: row;
+        border-bottom: 2px solid $gray-400;
+    }
 }
 
 .Portfolio-Item__Logo {
-    width: 25%;
+    width: 100%;
     position: relative;
     float: left;
+    @media screen and (min-width: $xs-breakpoint) {
+        width: 33%;
+    }
     img {
         width: 100%;
         height: auto;
@@ -58,7 +85,16 @@
 
 .Portfolio-Item__Summary {
     padding: 3% 0px 0 3%;
-    width: 75%;
+    width: 100%;
+    @media screen and (min-width: $xs-breakpoint) {
+        width: 75%;
+    }
+    h6 {
+        font-size: 0.7rem;
+        @media screen and (min-width: $md-breakpoint) {
+            font-size: 0.875rem;
+        }
+    }
 }
 
 .Potfolio-Item__Content {
@@ -76,27 +112,44 @@
             width: 25%;
             text-align: right;
             padding: 3px;
+            display: none;
+            @media screen and (min-width: $md-breakpoint) {
+                display: block;
+            }
         }
         .Subdetail_right {
-            width: 75%;
+            width: 100%;
             text-align: left;
             padding: 3px;
+            font-size: 0.8rem;
+            @media screen and (min-width: $md-breakpoint) {
+                width: 75%;
+                font-size: inherit;
+            }
         }
     }
 }
 
 .Portfolio-Item__Portcats {
-    text-align: right;
     padding: 10px 0;
+    font-size: 0.7rem;
+    @media screen and (min-width: $xs-breakpoint) {
+        text-align: right;
+        font-size: inherit;
+    }
 }
 
 .section-content {
     padding-bottom: 40px;
+    font-size: 0.8rem;
+    @media screen and (min-width: $xs-breakpoint) {
+        font-size: inherit;
+    }
 }
 
 .Portfolio-Item__Gallery {
-    display: flex;
     flex-direction: column;
+    display: flex;
     .slick-slide {
         padding: 30px;
     }
@@ -111,18 +164,39 @@
 }
 
 .Portfolio-Item__Gallery-Img {
-    width: 31%;
+    width: 100%;
     padding: 1%;
     border: 1px solid $gray-400;
     margin: 1%;
     border-radius: 2px;
     cursor: pointer;
+    @media screen and (min-width: $md-breakpoint) {
+        width: 31%;
+    }
     .img-peloader {
         width: 100%;
         height: 0;
         padding-top: 75%;
         position: relative;
     }
+}
+
+.Portfolio-Item__img-preloader {
+    background: url('/images/spinner.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20%;
+    width: 100%;
+    height: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    position: relative;
+    bottom: 0;
+    padding-top: 64%;
+    // @media screen and (min-width: $sm-breakpoint) {
+    //     padding-top: 150%;
+    // }
 }
 
 .Gallery-Tile__info--info-show {
@@ -133,5 +207,31 @@
 }
 
 .Gallery-Tile__info {
+    opacity: 0;
+}
+
+.Portfolio-Item__Gallery--tiles {
+    opacity: 1.0;
+    transition: opacity 750ms ease-in;
+}
+
+.Portfolio-Item__Gallery--slideshow {
+    opacity: 0.0;
+    transition: opacity 750ms ease-in;
+    position: relative;
+    width: 100%;
+}
+
+.Portfolio-Item__Gallery--slideshow-inner {
+    width: 95%;
+    position: absolute;
+    margin-left: 2.5%;
+}
+
+.content--active {
+    opacity: 1.0;
+}
+
+.content--inactive {
     opacity: 0;
 }

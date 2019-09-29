@@ -12,6 +12,9 @@ import { history } from '../routers/AppRouter';
 class PortfolioItemDetailsPage extends React.Component {
     constructor(props) {
         super(props)
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+
         this.state = {
             galleryMode: 'tile'
         }
@@ -19,9 +22,9 @@ class PortfolioItemDetailsPage extends React.Component {
     }
 
 
-    componentWillMount() {
-        window.scrollTo(0,0);
-    }
+    // UNSAFE_componentWillMount() {
+    //     window.scrollTo(0,0);
+    // }
 
 
     handleReturn = (e) => {
@@ -37,6 +40,13 @@ class PortfolioItemDetailsPage extends React.Component {
 
     toggleGalleryMode = (e, idx) => {
         e.preventDefault();
+
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        if(w < 768) {
+            return false;
+        }
+
         this.setState({
             galleryMode: this.state.galleryMode === 'tile' ? 'slideshow' : 'tile'
         })
@@ -61,9 +71,10 @@ class PortfolioItemDetailsPage extends React.Component {
             swipeToSlide: true,
             centerPadding: "60px",
             arrows: true,
+            centerMode: false,
             nextArrow: <SliderArrow type='next' />,
             prevArrow: <SliderArrow type='prev' />,
-            centerMode: false
+
         }
 
         const {
@@ -96,6 +107,9 @@ class PortfolioItemDetailsPage extends React.Component {
 
         // remove the slash from the end of the last category or it'll look weird
         aryCats[aryCats.length-1] = aryCats[aryCats.length-1].replace(' / ', '');
+
+        const tilesClass = this.state.galleryMode === 'tile' ? 'Portfolio-Item__Gallery--tiles content--active' : 'Portfolio-Item__Gallery--tiles content--inactive';
+        const slideClass = this.state.galleryMode === 'slideshow' ? 'Portfolio-Item__Gallery--slideshow content--active' : 'Portfolio-Item__Gallery--slideshow content--inactive';
 
         return (
             <div className="Portfolio-Item">
@@ -160,32 +174,34 @@ class PortfolioItemDetailsPage extends React.Component {
                                             <Link to="#" className="float-right" onClick={this.toggleGalleryMode}>Tile View</Link>
                                         }                                    
                                         </div>
-    
+                                        <div className={tilesClass}>
                                         {this.state.galleryMode === 'tile' && 
                                         <div className="Portfolio-Item__Gallery-Imgs">
-                                        {auxImgs.map((img, idx) => {
-                                            return (
-                                            <GalleryTile 
-                                                key={idx}
-                                                handleClick={this.toggleGalleryMode}
-                                                src={img}
-                                                idx={idx}
-                                            />)
-                                        })}
+                                            {auxImgs.map((img, idx) => {
+                                                return (
+                                                <GalleryTile 
+                                                    key={idx}
+                                                    handleClick={this.toggleGalleryMode}
+                                                    src={img}
+                                                    idx={idx}
+                                                />)
+                                            })}
 
+                                            </div>
+                                        }
                                         </div>
-                                    }
-
-                                    {this.state.galleryMode === 'slideshow' &&
-                                        <Slider ref={slider=> (this.slider = slider)} {...sliderSettings}>
-                                        {auxImgs.map((item) => {
-                                            return (
-                                                <img  key={uuid()} src={item} />
-                                            )
-                                        })}
-                                        </Slider>                                  
-                                
-                                    }
+                                        <div className={slideClass}>
+                                            {this.state.galleryMode === 'slideshow' &&
+                                                <Slider ref={slider=> (this.slider = slider)} {...sliderSettings}>
+                                                {auxImgs.map((item) => {
+                                                    return (
+                                                        <img  key={uuid()} src={item} />
+                                                    )
+                                                })}
+                                                </Slider>                                  
+                                        
+                                            }
+                                        </div>
                                     </div>                                    
                                 </div>
 
@@ -195,7 +211,7 @@ class PortfolioItemDetailsPage extends React.Component {
 
                     <div className="row">
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                            <Link className="btn btn-outline-primary" onClick={this.handleReturn} to="/">Back To Porfolio</Link>
+                            <Link className="btn btn-outline-warning" onClick={this.handleReturn} to="/">Back To Porfolio</Link>
                         </div>
                     </div>
                 </div>  

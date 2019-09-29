@@ -11,8 +11,6 @@
     display: flex;
     justify-content: space-around;
     div {
-        position: absolute;
-        top: 30px;
         width: 100%;
         padding-bottom: 15px;
         border-bottom: 1px solid $gray-600;
@@ -20,7 +18,7 @@
 }
 
 .about-img {
-    width: 33%;
+    width: 50%;
     margin: 10px 10px 0 0;
     position: relative;
     float: left;

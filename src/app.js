@@ -27,7 +27,8 @@ const jsx = (
 let hasRendered = false;
 const renderApp = () => {
     if(!hasRendered) {
-        localStorage.removeItem('yPos');
+        localStorage.removeItem('returnOffsetTop');
+        localStorage.setItem('railStates','[]')
         ReactDOM.render(jsx, document.getElementById('app'));
         hasRendered = true;
     } else {

@@ -1,6 +1,4 @@
 import React from 'react';
-//import {Button, Row, Col, Container} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
 import Slider from 'react-slick';
 import uuid from 'uuid';
 import PortRailItem from './PortRailItem';
@@ -10,6 +8,32 @@ import SliderArrow from './SliderArrow';
 
 const PortfolioRail = (props) => {
     
+
+        const setRailCurrentState = (current) => {
+            const railStates = JSON.parse(localStorage.getItem('railStates'));
+            railStates.forEach((rail) => {
+                const thisRailIdx = railStates.findIndex((rail) => {
+                    return rail.catId+'' === props.catId+''
+                })
+                if(thisRailIdx !== -1) {
+                    railStates[thisRailIdx].currentSlide = current;
+                }
+            })
+            localStorage.setItem('railStates', JSON.stringify(railStates))
+        }
+
+
+        let initialSlide = 0;
+        let railStates = JSON.parse(localStorage.getItem('railStates'));
+        railStates.forEach((rail) => {
+            const thisRailIdx = railStates.findIndex((rail) => {
+                return rail.catId+'' === props.catId+''
+            })
+            if(thisRailIdx !== -1) {
+                initialSlide = railStates[thisRailIdx].currentSlide;
+            }
+        })        
+
         const portItems = props.portfolio;
           const settings = {
             dots: false,
@@ -17,8 +41,10 @@ const PortfolioRail = (props) => {
             speed: 2000,
             slidesToScroll: 1,
             centerMode: false,
+            initialSlide: initialSlide,
             ladyLoad: true,
             slidesToShow: 5,
+            afterChange: current => setRailCurrentState(current),
             nextArrow: <SliderArrow type='next' />,
             prevArrow: <SliderArrow type='prev' />,
             responsive: [

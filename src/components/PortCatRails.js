@@ -10,6 +10,21 @@ import portfolioListFilter from '../selectors/portfolio-list-filter'
 class PortCatRails extends React.Component {
     constructor(props) {
         super(props);
+
+        const railStates = JSON.parse(localStorage.getItem('railStates'));
+        portcats.forEach((cat) => {
+            const thisRailIdx = railStates.findIndex((rail) => {
+                return rail.catId+'' === cat.id+''
+            })
+            if(thisRailIdx === -1) {
+                railStates.push({
+                    catId: cat.id,
+                    currentSlide: 0
+                })
+            } 
+        });
+        localStorage.setItem('railStates', JSON.stringify(railStates))
+
     }
 
 
@@ -20,6 +35,8 @@ class PortCatRails extends React.Component {
                     <div className="row">
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h1 className="text-primary home-section-title">My Past Works</h1>
+                            <p className="text-white d-block d-sm-none">Swipe to navigate galleries / click to view details</p>
+                            <p>&nbsp;</p>
                         </div>
                     </div>
                     <div className="row">
@@ -27,7 +44,7 @@ class PortCatRails extends React.Component {
                         {
                             portcats.map((cat) => {
                                 const portfolioByCat = portfolioListFilter(this.props.portfolio, {catId: cat.id});
-                    
+
                                 return (
                                     (portfolioByCat.length >= 4) && <PortfolioRail key={uuid()} portfolio={portfolioByCat} title={cat.name} catId={cat.id} />
                                 )
@@ -51,54 +68,3 @@ const mapStateToProps = (state, props) => {
 }
 
 export default connect(mapStateToProps)(PortCatRails);
-
-
-
-
-// const PortCatRails = (props) => {
-
-    // const [modalState, dispatch] = useReducer(railItemModalReducer, {
-    //     showModal: false,
-    //     portfolioItem: {}
-    // });
-
-
-    // const hideModal = () => {
-    //     dispatch({
-    //         type: 'HIDE_MODAL'
-    //     })
-    // }        
-
-    // useEffect(() => {
-    //     if(modalState.showModal) {
-    //         dispatch({
-    //             type: 'SHOW_MODAL',
-    //             modalState.portfolioItem
-    //         })
-    //     } else {
-    //         dispatch({
-    //             type: 'HIDE_MODAL'
-    //         })
-    //     }
-    // },[modalState]);
-
-
-//     return (
-//         <PortfolioRailItemModalContext.Provider value={{modalState, dispatch}}>
-//         <div>
-//             {
-//                 portcats.map((cat) => {
-//                     const portfolio = props.portfolio.filter((item) => {     
-//                         return (item.portcats && item.portcats.indexOf(cat.id+'') !== -1)                    
-//                     })
-          
-//                     return (
-//                         <PortfolioRail key={uuid()} portfolio={potfolio} title={cat.name} catId={cat.id} />
-//                     )
-//                 })
-//             }
-//         </div>
-//         </PortfolioRailItemModalContext.Provider>
-//     );
-// }
-

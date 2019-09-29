@@ -12,7 +12,7 @@ const GalleryTile = (props) => {
 
     return (                                                
         <div className="Gallery-Tile" onClick={doHandleClick} className="Portfolio-Item__Gallery-Img">
-            <div><ImageWithPreloader src={src} /></div>
+            <div><ImageWithPreloader src={src} className="Portfolio-Item__img-preloader" /></div>
         </div>
     )
 }
