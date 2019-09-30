@@ -8,6 +8,9 @@ import { Tabs, Tab, TabList, TabPanel } from 'react-tabs';
 import uuid from 'uuid';
 import { Link } from 'react-router-dom';
 import { firebase } from '../../firebase/firebase';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faSortUp, faSortDown} from '@fortawesome/free-solid-svg-icons'
+
 
 
 
@@ -149,6 +152,38 @@ class SiteSettingsEditForm extends React.Component {
         });
     }
 
+
+
+    doSortSlides = (e, idx, dir) => {
+        e.preventDefault();
+        const aSliderImgs = this.state.sliderImgs.filter((img) => {
+            return img.orientation === this.state.slideOrientation
+        });
+
+        const bSliderImgs = this.state.sliderImgs.filter((img) => {
+            return img.orientation !== this.state.slideOrientation
+        });
+
+        // the image that's getting moved
+        const imgToMove = aSliderImgs[idx];
+        const moveIdx = dir === 'up' ? idx-1 : idx+1; 
+
+        // [a, b, C, D, e, f]
+        aSliderImgs.splice(idx,1);
+
+        aSliderImgs.splice(moveIdx,0, imgToMove);
+        // [a, b, C, e, f]
+        //sliderImgs.splice(moveIdx,imgToMove);
+        // [a, b, D, C, e, f]
+        const sliderImgs = [...aSliderImgs, ...bSliderImgs];
+
+        this.setState({
+            sliderImgs
+        });
+        setTimeout(() => {
+            this.doPostData();
+        }, 500)
+    }
 
 
     // what happens when the user confirms deleting the slider image
@@ -547,6 +582,10 @@ class SiteSettingsEditForm extends React.Component {
                                                             <div key={uuid()} className="slider-img-list-item">
                                                                 <div className="slider-img-check"> <input type="radio" name={`rdoIsForeground_${img.orientation}`} defaultChecked={img.isForeground} id={img.id} onChange={this.handleRdoForegroundClick} /></div>
                                                                 <div className={`slider-img slider-img--${this.state.slideOrientation}`}><img src={img.src} /></div>
+                                                                <div className="slider-img-sorting">
+                                                                    <div className="move-up">{idx !== 0 && <Link to="#moveup" title="Move Up" onClick={(e) => this.doSortSlides(e, idx, 'up')}><FontAwesomeIcon icon={faSortUp} size="2x"></FontAwesomeIcon></Link>}</div>
+                                                                    <div className="move-dn">{idx !== sliderImgs.length-1 && <Link to="#movedown"  onClick={(e) => this.doSortSlides(e, idx, 'down')} title="Move Down" data-idx={idx}><FontAwesomeIcon icon={faSortDown} size="2x"></FontAwesomeIcon></Link>}</div>
+                                                                </div>
                                                                 <div className="slider-img-btns"><Link to="/#delete" data-id={img.id} data-idx={idx} onClick={this.showDeleteSliderImgModal} className="badge badge-danger">Delete</Link> <a href={img.src} target="_blank" className="badge badge-primary">Preview</a></div>
                                                             </div>
                                                         );
