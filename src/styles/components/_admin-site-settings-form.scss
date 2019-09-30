@@ -43,6 +43,9 @@
         height: 30px;
         margin: 0 auto;
         cursor: pointer;
+        &:hover {
+            color: $gray-400;
+        }
     }
     .slider-img-orientation-landscape {
         width: 30px;
@@ -50,6 +53,9 @@
         height: 15px;
         margin-top: 7.5px;
         cursor: pointer;
+        &:hover {
+            color: $gray-400;
+        }
     }
 }
 

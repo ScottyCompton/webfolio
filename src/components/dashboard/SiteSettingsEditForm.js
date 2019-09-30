@@ -39,6 +39,7 @@ class SiteSettingsEditForm extends React.Component {
                 show: false,
                 type: 'INFO',
                 message: '',
+                dataIdx: undefined,
                 confirmBtnText: '',
                 closeBtnText: '',
                 onConfirm: undefined,
@@ -100,7 +101,12 @@ class SiteSettingsEditForm extends React.Component {
         this.setState({
             sliderImgs
         })
-        
+
+        this.doPostData();
+        setTimeout(() => {
+            this.doSuccessModal('Slider Cover Image has been assigned.');
+        }, 500)        
+
     }
 
 
@@ -113,17 +119,17 @@ class SiteSettingsEditForm extends React.Component {
     // user wants to delete the selected slide image
 
     showDeleteSliderImgModal = (e) => {     
-
-        // get the id of the image to frag
-        const imgToDeleteId = e.target.getAttribute('data-id');
+        e.preventDefault();
+        const idx = e.target.getAttribute('data-idx');
+        console.log(idx);
 
         // setup the modal window
         this.setState({
-            imgToDeleteId,
             msgModal: {
                 message: 'Are you sure you want to delete this slider image?',
                 type: 'INFODELETE',
                 show: true,
+                dataIdx: idx,
                 confirmBtnText: 'Yes Delete It',
                 closeBtnText: 'Cancel',
                 onConfirm: this.handleDelSliderImg,
@@ -146,17 +152,18 @@ class SiteSettingsEditForm extends React.Component {
 
 
     // what happens when the user confirms deleting the slider image
-    handleDelSliderImg = () => {
-        const { imgToDeleteId, sliderImgs } = this.state
+    handleDelSliderImg = (e) => {
+        e.preventDefault();
+        const sliderImgs = this.state.sliderImgs.filter((img) => {
+            return img.orientation = this.state.slideOrientation
+        })
+        debugger
 
-        const imgIdx = sliderImgs.findIndex((img) => {
-            return img.id = imgToDeleteId;
-        });
+        const sliderImgIdx = e.target.getAttribute('data-idx');
+        const sliderImgToDelete = sliderImgs[sliderImgIdx].src;        
 
-        const imgToDelete = sliderImgs[imgIdx].src;
-
-        if (imgToDelete) {
-            const imgNameRight = imgToDelete.split('%2F').pop(); // everything after %2f
+        if (sliderImgToDelete) {
+            const imgNameRight = sliderImgToDelete.split('%2F').pop(); // everything after %2f
             const imgName = imgNameRight.split('?').shift() // everything before ?
             // imgName should be 8wjseysfas-fkdfysdf3.jpg or something similar
             firebase
@@ -166,20 +173,20 @@ class SiteSettingsEditForm extends React.Component {
                 .delete()
                 .then(() => {
                     console.log(`## deleted ${imgName} from storage`);
-                    sliderImgs.splice(imgIdx, 1)
-                    this.setState({
-                        sliderImgs
-                    });
-                    this.doPostData();
-                    setTimeout(() => {
-                        this.doSuccessModal('Slider Image successfully removed');
-                    }, 500)
-                    
                 }).catch((err) => {
                     console.log(`Could not delete ${imgName} because of the following error:`, err);
                 })
         }
 
+
+        sliderImgs.splice(sliderImgIdx, 1)
+        this.setState({
+            sliderImgs
+        });
+        this.doPostData();
+        setTimeout(() => {
+            this.doSuccessModal('Slider Image successfully removed');
+        }, 500)
 
     }
 
@@ -227,7 +234,7 @@ class SiteSettingsEditForm extends React.Component {
         this.setState(
             {
                 msgModal: {
-                    type: 'INFO',
+                    type: 'CLOSE',
                     show: false,
                     message: ''
                 }
@@ -308,6 +315,7 @@ class SiteSettingsEditForm extends React.Component {
                     confirmBtnText={this.state.msgModal.confirmBtnText}
                     closeBtnText={this.state.msgModal.closeBtnText}
                     onConfirm={this.state.msgModal.onConfirm}
+                    dataIdx={this.state.msgModal.dataIdx}
                 />
                 <div className="row">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -524,21 +532,22 @@ class SiteSettingsEditForm extends React.Component {
                                     <div className="form-group text-center">
                                         <div className="slider-img-list-group card bg-dark">
                                             <div style={{height: "30px"}}>
+                                                <label className="text-white">Orientation: {this.state.slideOrientation} </label>
                                                 <div className="slider-img-orientation">
-                                                    {this.state.slideOrientation === 'portrait' && <div onClick={this.setSliderImgOrientation} className="slider-img-orientation-portrait bg-primary">&nbsp;</div>}
-                                                    {this.state.slideOrientation === 'landscape' && <div onClick={this.setSliderImgOrientation} className="slider-img-orientation-landscape bg-primary">&nbsp;</div>}
+                                                    {this.state.slideOrientation === 'landscape' && <div onClick={this.setSliderImgOrientation} className="slider-img-orientation-portrait bg-primary" title="Switch To Portrait Orientation">&nbsp;</div>}
+                                                    {this.state.slideOrientation === 'portrait' && <div onClick={this.setSliderImgOrientation} className="slider-img-orientation-landscape bg-primary" title="Switch To Landscape Orientation">&nbsp;</div>}
                                                 </div>                                            
                                             </div>
 
                                             <div>
                                                 {sliderImgs.length === 0 && <p><br />No {this.state.slideOrientation} images</p>}
                                                 {   
-                                                    sliderImgs.map((img) => {
+                                                    sliderImgs.map((img, idx) => {
                                                         return (
                                                             <div key={uuid()} className="slider-img-list-item">
                                                                 <div className="slider-img-check"> <input type="radio" name={`rdoIsForeground_${img.orientation}`} defaultChecked={img.isForeground} id={img.id} onChange={this.handleRdoForegroundClick} /></div>
                                                                 <div className={`slider-img slider-img--${this.state.slideOrientation}`}><img src={img.src} /></div>
-                                                                <div className="slider-img-btns"><a href={img.src} target="_blank" className="badge badge-primary">Preview</a> <Link to="#delete" data-id={img.id} onClick={this.showDeleteSliderImgModal} className="badge badge-danger">Delete</Link></div>
+                                                                <div className="slider-img-btns"><Link to="/#delete" data-id={img.id} data-idx={idx} onClick={this.showDeleteSliderImgModal} className="badge badge-danger">Delete</Link> <a href={img.src} target="_blank" className="badge badge-primary">Preview</a></div>
                                                             </div>
                                                         );
                                                     })

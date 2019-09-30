@@ -258,7 +258,9 @@ class PortfolioEditForm extends React.Component {
         this.setState(
             {
                 msgModal: {
-                    show: false
+                    type: 'CLOSE',
+                    show: false,
+                    message: ''
                 }
             }
         )
@@ -384,14 +386,11 @@ class PortfolioEditForm extends React.Component {
                     console.log(`Could not delete ${imgName} because of the following error:`, err);
                 })
         }
-        // const { auxImgs } = this.state;
-        // const auxImgIdx = e.target.getAttribute('data-idx');
         auxImgs.splice(auxImgIdx, 1)
         this.setState({
             auxImgs
         });
         this.doPostData();
-        //this.handleCancelDelAuxImg(e);
         setTimeout(() => {
             this.doSuccessModal('Slideshow Image successfully removed');
         }, 500)

@@ -15,7 +15,7 @@ export const AdminHeader = ({ startLogout }) => (
                 <div className="header_links">
                     <Link to="/" className="btn btn-secondary btn-sm" style={{marginRight: "20px"}} target="_blank">View Website</Link>
                     <Link to="/dashboard/settings" title="Site Settings"><FontAwesomeIcon icon={faCogs} size="2x"></FontAwesomeIcon></Link>
-                    <Link onClick={startLogout} title="Logout"><FontAwesomeIcon icon={faSignOutAlt} size="2x"></FontAwesomeIcon></Link>
+                    <Link to="#logout" onClick={startLogout} title="Logout"><FontAwesomeIcon icon={faSignOutAlt} size="2x"></FontAwesomeIcon></Link>
                 </div>
             </div>
         </div>

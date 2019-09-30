@@ -13,7 +13,13 @@ const messageModalData = (props) => {
         confirmSaveBtnText = 'Save & Exit'
     } = props;
 
+
     return {
+        CLOSE: {
+            titles: [''],
+            buttons: [<span></span>],
+            textClass: ''
+        },
         ERROR: {
             titles: [
                 'Houston, we have a problem...',
