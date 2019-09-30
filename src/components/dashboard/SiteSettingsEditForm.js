@@ -538,7 +538,7 @@ class SiteSettingsEditForm extends React.Component {
                                                             <div key={uuid()} className="slider-img-list-item">
                                                                 <div className="slider-img-check"> <input type="radio" name={`rdoIsForeground_${img.orientation}`} defaultChecked={img.isForeground} id={img.id} onChange={this.handleRdoForegroundClick} /></div>
                                                                 <div className={`slider-img slider-img--${this.state.slideOrientation}`}><img src={img.src} /></div>
-                                                                <div className="slider-img-btns"><Link to="#preview" className="badge badge-primary">Preview</Link> <Link to="#delete" data-id={img.id} onClick={this.showDeleteSliderImgModal} className="badge badge-danger">Delete</Link></div>
+                                                                <div className="slider-img-btns"><a href={img.src} target="_blank" className="badge badge-primary">Preview</a> <Link to="#delete" data-id={img.id} onClick={this.showDeleteSliderImgModal} className="badge badge-danger">Delete</Link></div>
                                                             </div>
                                                         );
                                                     })

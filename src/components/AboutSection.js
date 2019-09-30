@@ -9,11 +9,11 @@ const AboutSection = (props) => {
     const {aboutTitle, aboutBlurb, aboutImg, contactPhone, contactEmail, resumeUrl} = props.siteSettings;
 
     return (
-        <div>
+        <div classname="hide-on-nav">
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-                            <div className="are-you-hiring text-center">
+                            <div className="are-you-hiring text-center hide-on-nav">
                                 <div><b>Are you hiring? </b> Because I'm looking.  <a href={resumeUrl} target="_blank">Click here to download a copy of my resume.</a></div>
                             </div>
                         </div>

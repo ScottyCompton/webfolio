@@ -102,7 +102,7 @@ class HeroSlider extends React.Component {
             <div className="container-fluid no-padding">
                 <div className="row no-padding">
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
-                        <div id="heroslider" className="heroslider-container trans-on-resize">
+                        <div id="heroslider" className="heroslider-container trans-on-resize hide-on-nav">
                             <div className={`heroslider-${this.state.windowState}`}>
                                 {foregroundImg && <div className="heroslider__foreground trans-on-resize" style={foregroundStyle}></div>}
                                 <div className="heroslider__background trans-on-resize hide-on-resize">

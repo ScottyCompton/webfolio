@@ -7,11 +7,14 @@ class ReturnScroll extends React.Component {
 
     componentDidMount() {
         const returnOffsetTop = localStorage.getItem('returnOffsetTop') || 0;
-        window.scrollTo({
-            top: returnOffsetTop,
-            behavior: 'smooth'
-        })    
-    
+        const doReturnHome = localStorage.getItem('returnhome') === '1';
+        if(doReturnHome) {
+            localStorage.setItem('returnhome','0');
+            window.scrollTo({
+                top: returnOffsetTop,
+                behavior: 'smooth'
+            })    
+        }    
     }
 
     render() {

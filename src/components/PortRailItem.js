@@ -24,6 +24,9 @@ const PortRailItem = (props) => {
     }
 
     const handleViewDetailsClick = (e) => {
+        // instead of a regular link back, i want the portfolio item
+        // page to scroll to the top of the page when it lands there
+
         e.preventDefault();
         const portfolioId = e.target.getAttribute('data-id');
         const top = window.scrollY;

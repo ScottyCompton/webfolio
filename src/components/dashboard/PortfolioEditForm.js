@@ -532,7 +532,7 @@ class PortfolioEditForm extends React.Component {
                                                     return (
                                                         <div key={uuid()} className="aux-img-list-item">
                                                             <div className="aux-img"><img src={img} /></div>
-                                                            <div className="aux-img-btns"><Link to="#preview" className="badge badge-primary">Preview</Link> <Link to="#delete" data-idx={idx} onClick={this.doConfirmDelAuxImg} className="badge badge-danger">Delete</Link></div>
+                                                            <div className="aux-img-btns"><a href={img} target="_blank" className="badge badge-primary">Preview</a> <Link to="#delete" data-idx={idx} onClick={this.doConfirmDelAuxImg} className="badge badge-danger">Delete</Link></div>
                                                         </div>
                                                     );
                                                 })}

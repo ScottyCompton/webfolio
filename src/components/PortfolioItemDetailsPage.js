@@ -29,11 +29,10 @@ class PortfolioItemDetailsPage extends React.Component {
 
     handleReturn = (e) => {
         e.preventDefault();
-        const returnOffsetTop = localStorage.getItem('returnOffsetTop');
-        window.scrollTo({
-            top: returnOffsetTop,
-            behavior: 'smooth'
-        })
+        // this is to makesure that the home page scroller only works
+        // once when componentDidMount() fires on the home page load.
+        localStorage.setItem('returnhome','1');
+
         history.push('/');
     }
 
@@ -110,9 +109,9 @@ class PortfolioItemDetailsPage extends React.Component {
 
         const tilesClass = this.state.galleryMode === 'tile' ? 'Portfolio-Item__Gallery--tiles content--active' : 'Portfolio-Item__Gallery--tiles content--inactive';
         const slideClass = this.state.galleryMode === 'slideshow' ? 'Portfolio-Item__Gallery--slideshow content--active' : 'Portfolio-Item__Gallery--slideshow content--inactive';
-
+        
         return (
-            <div className="Portfolio-Item">
+            <div className="Portfolio-Item hide-on-nav">
                 <div className="container">
                     <div className="row">
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">

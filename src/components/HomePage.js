@@ -9,10 +9,18 @@ class HomePage extends React.Component {
         super(props);
     }
 
+    componentDidMount() {
+        const returnOffsetTop = localStorage.getItem('returnOffsetTop') || 0;
+        const doReturnHome = localStorage.getItem('returnhome') === '1';
+        if(doReturnHome) {
+            localStorage.setItem('returnhome','0');
+            window.scrollTo(0,returnOffsetTop);
+        }    
+    }    
 
     render() {
         return (
-            <div className="home-page">
+            <div id="home-page" className="home-page">
                 <HeroSlider />
                 <AboutSection />
                 <PortCatRails />

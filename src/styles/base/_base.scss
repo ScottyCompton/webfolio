@@ -143,6 +143,9 @@ body {
 .fade-exit.fade-exit-active {
     opacity: 0;
     transition: opacity 600ms linear;
+    .hide-on-nav {
+        visibility: hidden;
+    }
 }
 
 .home-section-title {
