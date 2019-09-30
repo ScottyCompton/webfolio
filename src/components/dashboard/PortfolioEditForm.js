@@ -419,9 +419,8 @@ class PortfolioEditForm extends React.Component {
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
                         <h5 className="admin-page-title">{this.props.portfolioItem ? 'Edit Portfolio Item ' : 'Create New Portfolio Item'} 
                         {this.props.portfolioItem && <Link className="btn btn-secondary btn-small float-right" to="/dashboard/portfolio/create">Create New</Link>}
-                        {this.props.portfolioItem && <Link className="btn btn-success btn-small float-right" style={{marginRight: "10px"}} target="_blank" to={`/portfolio/${this.props.portfolioItem.id}`}>View In Browser</Link>}
-                        </h5>
-                        
+                        {(this.props.portfolioItem && this.state.auxImgs.length > 0 && this.state.longDesc && !this.state.isNew) && <Link className="btn btn-success btn-small float-right" style={{marginRight: "10px"}} target="_blank" to={`/portfolio/${this.props.portfolioItem.id}`}>View In Browser</Link>}
+                        </h5>                        
                     </div>
                 </div>
                     <div className="row">

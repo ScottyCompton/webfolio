@@ -5,18 +5,22 @@ import { connect } from 'react-redux'
 import uuid from 'uuid';
 
 class PortfolioItemsWithCats extends React.Component  {
+    _itemCount = 0;
     constructor(props) {
         super(props)
     }
 
-    render() {
-        const toDisplay = (
+    toDisplay =  () => {
+        let itemCount = 0;
+
+        const output = (
             portcats.map((cat) => {
                 let catId = cat.id;
                 let catName = cat.name;
                 let portItems = this.props.portfolio.filter((item) => {     
                     return (item.portcats && item.portcats.indexOf(catId+'') !== -1)                    
-                })            
+                })   
+                itemCount += portItems.length;
                 return (
                     portItems.length > 0 &&
                     <div key={uuid()} className="portfolio-edit-select__group">
@@ -37,12 +41,23 @@ class PortfolioItemsWithCats extends React.Component  {
                     </div>
                     
                 )
-            })            
-            
-        );
+            })                        
+        )
 
+        if (itemCount === 0) {
+            return (
+                <div className="text-center" style={{width: "100%"}}>You currently have no items in your portfolio. Add some!</div>
+            )
+        } else {
+            return output
+        }
+    }
+
+
+    render() {
+        
         return (
-            <div className="portfolio-edit-select__container">{toDisplay}</div>
+            <div className="portfolio-edit-select__container">{(this.toDisplay())}</div>
         )
 
     }
