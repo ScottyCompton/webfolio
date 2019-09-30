@@ -32,6 +32,7 @@ class PortfolioEditForm extends React.Component {
             auxImgs: portfolioItem && portfolioItem.auxImgs ? portfolioItem.auxImgs : [],
             githubUrl: portfolioItem ? portfolioItem.githubUrl : '',
             portcats: portfolioItem && portfolioItem.portcats ? portfolioItem.portcats : [],
+            published: portfolioItem && portfolioItem.published ? portfolioItem.published : false,
             msgModal: {
                 show: false,
                 type: 'INFO',
@@ -276,7 +277,8 @@ class PortfolioEditForm extends React.Component {
             githubUrl: this.state.githubUrl,
             auxImgs: this.state.auxImgs || [],
             cso: this.state.cso || [],
-            lastUpdated: moment().valueOf()
+            lastUpdated: moment().valueOf(),
+            published: this.state.published,
         });
         this.setState({
             execPostFromUpload: false,
@@ -305,6 +307,14 @@ class PortfolioEditForm extends React.Component {
         }
     }
 
+    togglePublish = () => {
+        this.setState({
+            published: !this.state.published
+        });
+        setTimeout(() => {
+            document.getElementById('btnSubmit').click();
+        },500)
+    }
 
     onSaveExit = () => {
         this.setState({
@@ -350,13 +360,6 @@ class PortfolioEditForm extends React.Component {
 
     handleCancelDelAuxImg = (e) => {
         this.closeMsgModal();
-        /*
-        this.setState({
-            modalConfirm: this.doConfirmExit,
-            modalCancel: this.closeMsgModal,
-            previousAuxImg: undefined
-        });
-        */
     }
 
 
@@ -396,6 +399,8 @@ class PortfolioEditForm extends React.Component {
     }
 
     render() {
+
+
         return (
             <form id="form-portfolio" onSubmit={this.onSubmit}>
             <AdminMessageModal
@@ -423,6 +428,12 @@ class PortfolioEditForm extends React.Component {
                         <div className="col-xs-12 col-sm-7 col-md-8 col-lg-8 card text-white bg-secondary mb-3">
                             <div className="card-body">
                                 <fieldset>
+                                <div className="form-group">
+                                    <div className="float-right">
+                                    {this.state.published && <div><span>This item is currently published </span><button type="button" className="btn btn-sm btn-danger" onClick={this.togglePublish}>Unpublish</button></div> }
+                                    {!this.state.published && <div><span>This item is currently unpblished </span><button type="button" className="btn btn-sm btn-success" onClick={this.togglePublish}>Publish</button></div> }
+                                    </div>
+                                </div>
                                 <div className="form-group">
                                     <label htmlFor="project-title">Item Title</label>
                                     <input

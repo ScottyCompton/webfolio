@@ -43,7 +43,7 @@ class PortCatRails extends React.Component {
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 white-text">
                         {
                             portcats.map((cat) => {
-                                const portfolioByCat = portfolioListFilter(this.props.portfolio, {catId: cat.id});
+                                const portfolioByCat = portfolioListFilter(this.props.portfolio, {catId: cat.id}, true);
 
                                 return (
                                     (portfolioByCat.length >= 4) && <PortfolioRail key={uuid()} portfolio={portfolioByCat} title={cat.name} catId={cat.id} />

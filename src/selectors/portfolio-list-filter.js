@@ -2,11 +2,15 @@
 
 // get portfoli by category
 
-export default (portfolio, {catId}) => {
+export default (portfolio, {catId}, published) => {
 
     if(catId !== '-1') {
         const filtered = portfolio.filter((item) => {
-            return (item.portcats && item.portcats.indexOf(catId + '') !== -1)                    
+            if(published === undefined) {
+                return ((item.portcats && item.portcats.indexOf(catId + '') !== -1))
+            } else {
+                return ((item.portcats && item.portcats.indexOf(catId + '') !== -1) && (item.published === published))
+            }
          });
         
         const sorted = filtered.sort((a,b) => {
