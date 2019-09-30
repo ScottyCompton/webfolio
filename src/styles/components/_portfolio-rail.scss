@@ -74,7 +74,7 @@
     position: relative;
     border: 10px solid #fff;
     @media screen and (min-width: $sm-breakpoint) {
-        border: none;
+        border: 1px solid #202020;
     }
     img {
         width: 100%;
