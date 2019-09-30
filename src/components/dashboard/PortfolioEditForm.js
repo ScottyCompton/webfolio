@@ -430,8 +430,9 @@ class PortfolioEditForm extends React.Component {
                                 <fieldset>
                                 <div className="form-group">
                                     <div className="float-right">
-                                    {this.state.published && <div><span>This item is currently published </span><button type="button" className="btn btn-sm btn-danger" onClick={this.togglePublish}>Unpublish</button></div> }
-                                    {!this.state.published && <div><span>This item is currently unpblished </span><button type="button" className="btn btn-sm btn-success" onClick={this.togglePublish}>Publish</button></div> }
+                                    
+                                    {this.props.portfolioItem && this.state.published && <div><span>This item is currently published </span><button type="button" className="btn btn-sm btn-danger" onClick={this.togglePublish}>Unpublish</button></div> }
+                                    {this.props.portfolioItem && !this.state.published && <div><span>This item is currently unpblished </span><button type="button" className="btn btn-sm btn-success" onClick={this.togglePublish}>Publish</button></div> }
                                     </div>
                                 </div>
                                 <div className="form-group">
