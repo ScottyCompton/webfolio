@@ -188,8 +188,6 @@ class PortfolioEditForm extends React.Component {
 
     }
 
-
-    // methods for the image upload component
     retrievePreviewImgUrl = (url) => {
         this.setState({
             previewImg: url
@@ -223,7 +221,15 @@ class PortfolioEditForm extends React.Component {
     }
 
     doErrorModal = (error) => {
-        this.doMsgModal('ERROR', error);
+        this.setState({
+            msgModal: {
+            message: error,
+            type: 'ERROR',
+            show: true,
+            closeBtnText: 'OK',
+            onConfirm:undefined,
+            onHide: this.closeMsgModal,                
+        }})
     }
 
     doSuccessModal = (message) => {
@@ -238,22 +244,6 @@ class PortfolioEditForm extends React.Component {
         }})
     }
 
-    doInfoModal = (message) => {
-        this.doMsgModal('INFO', message);
-        
-    }
-
-
-    doMsgModal = (type, message) => {
-        this.setState({
-            msgModal: {
-                type,
-                message,
-                show: true
-            }
-        })
-        
-    }
 
     closeMsgModal = () => {
         this.setState(
