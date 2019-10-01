@@ -16,16 +16,10 @@ class PortfolioItemDetailsPage extends React.Component {
         var h = window.innerHeight;
 
         this.state = {
-            galleryMode: 'tile'
+            galleryMode: props.portfolioItem.auxImgs && props.portfolioItem.auxImgs.length === 1 ? 'slideshow' : 'tile'
         }
         
     }
-
-
-    // UNSAFE_componentWillMount() {
-    //     window.scrollTo(0,0);
-    // }
-
 
     handleReturn = (e) => {
         e.preventDefault();
@@ -170,9 +164,9 @@ class PortfolioItemDetailsPage extends React.Component {
                                     <div className="Portfolio-Item__Gallery section-content">
                                         <div className="Portfolio-Item__Gallery-Heading">
                                             <h4 className="float-left text-primary Portfolio-Item__Subtitle">Project Gallery</h4>
-                                            {this.state.galleryMode === 'slideshow' && 
-                                            <Link to="#" className="float-right" onClick={this.toggleGalleryMode}>Tile View</Link>
-                                        }                                    
+                                            {(this.state.galleryMode === 'slideshow' && auxImgs && auxImgs.length > 1) &&
+                                                <Link to="#" className="float-right" onClick={this.toggleGalleryMode}>Tile View</Link>
+                                            }                                    
                                         </div>
                                         <div className={tilesClass}>
                                         {this.state.galleryMode === 'tile' && 
