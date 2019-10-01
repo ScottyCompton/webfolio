@@ -34,7 +34,7 @@ export default (portfolio, {catId}, published) => {
          return sorted;
     } else {
         const sorted = portfolio.sort((a,b) => {
-            return a.projectTitle < b.projectTitle ? -1 : 1
+            return a.projectTitle.toLowerCase() < b.projectTitle.toLowerCase() ? -1 : 1
         });
         return sorted;
     }

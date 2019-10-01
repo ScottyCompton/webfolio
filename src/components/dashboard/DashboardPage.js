@@ -15,7 +15,8 @@ const DashboardPage = () => (
         </div>
         <div className="row">
             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <Link className="float-right portfolio-list__create-new btn btn-secondary" to="/dashboard/portfolio/create" style={{float: "left", marginLeft:"0"}}>Create New Item</Link>
+                <Link className="float-right portfolio-list__manage-order btn btn-secondary" to="/dashboard/portfolio" style={{float: "left", marginLeft:"10px"}}>Manage Display Order</Link>
+                <Link className="float-right portfolio-list__create-new btn btn-secondary" to="/dashboard/portfolio/create" style={{float: "left", marginLeft:"10px"}}>Create New Item</Link>
             </div>
         </div>
 

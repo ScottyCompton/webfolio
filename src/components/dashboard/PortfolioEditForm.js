@@ -507,7 +507,7 @@ class PortfolioEditForm extends React.Component {
                                 <Tabs>
                                     <TabList>
                                         <Tab>Main Image</Tab>
-                                        <Tab>Slideshow</Tab>
+                                        {!this.state.isNew && <Tab>Slideshow</Tab>}
                                     </TabList>
                                     <TabPanel>
                                 
@@ -592,7 +592,6 @@ class PortfolioEditForm extends React.Component {
                             </div>
                             <div className="form-group">
                                 <button id="btnSubmit" className="btn btn-success form-control" type="submit">{this.props.portfolioItem ? 'Update' : 'Create'} Portfolio Item</button><br /><br />
-                                <button className="btn btn-primary form-control" type="button" onClick={this.doConfirmExit}>Back To Portfolio</button>
                             </div>
 
 
