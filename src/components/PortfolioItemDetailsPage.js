@@ -85,7 +85,8 @@ class PortfolioItemDetailsPage extends React.Component {
             githubUrl,
             projectUrl,
             portcats,
-            techSpecs
+            techSpecs,
+            auxImgAspectRatio = "64.3"
         } = this.props.portfolioItem;
 
         const logoStyle = {
@@ -183,6 +184,7 @@ class PortfolioItemDetailsPage extends React.Component {
                                                     handleClick={this.toggleGalleryMode}
                                                     src={img}
                                                     idx={idx}
+                                                    auxImgAspectRatio={auxImgAspectRatio}
                                                 />)
                                             })}
 

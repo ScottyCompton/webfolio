@@ -168,13 +168,8 @@ class SiteSettingsEditForm extends React.Component {
         const imgToMove = aSliderImgs[idx];
         const moveIdx = dir === 'up' ? idx-1 : idx+1; 
 
-        // [a, b, C, D, e, f]
         aSliderImgs.splice(idx,1);
-
         aSliderImgs.splice(moveIdx,0, imgToMove);
-        // [a, b, C, e, f]
-        //sliderImgs.splice(moveIdx,imgToMove);
-        // [a, b, D, C, e, f]
         const sliderImgs = [...aSliderImgs, ...bSliderImgs];
 
         this.setState({

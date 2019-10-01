@@ -41,12 +41,15 @@ const PortRailItem = (props) => {
 		setInfoClass('');
 	}
 
+
         return (
             <span>
                 <div className="railItem__outer" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                     <div className="railItem__inner">
                         <div onClick={handleMouseEnter}>
-                            <ImageWithPreloader src={previewImg} className="railitem__img-preloader" />
+                            <ImageWithPreloader 
+                                src={previewImg} 
+                                className="railitem__img-preloader" />
                         </div>
                         <div className={`railItem__info ${infoClass}`}>
                             <h5>{projectTitle}</h5>

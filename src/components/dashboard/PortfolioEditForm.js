@@ -48,6 +48,7 @@ class PortfolioEditForm extends React.Component {
             newPreviewImgAdded: false,
             previousImg: undefined,
             previousAuxImg: undefined,
+            auxImgAspectRatio: portfolioItem && portfolioItem.auxImgAspectRatio ? portfolioItem.auxImgAspectRatio : '64.3',
             modalConfirm: this.onExitConfirm,
             modalOnSaveExit: this.onSaveExit,
             lastUpdated: portfolioItem ? portfolioItem.lastUpdated : moment().valueOf(),
@@ -281,6 +282,7 @@ class PortfolioEditForm extends React.Component {
             cso: this.state.cso || [],
             lastUpdated: moment().valueOf(),
             published: this.state.published,
+            auxImgAspectRatio: this.state.auxImgAspectRatio
         });
         this.setState({
             execPostFromUpload: false,
@@ -418,7 +420,7 @@ class PortfolioEditForm extends React.Component {
                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
                         <h5 className="admin-page-title">{this.props.portfolioItem ? 'Edit Portfolio Item ' : 'Create New Portfolio Item'} 
                         {this.props.portfolioItem && <Link className="btn btn-secondary btn-small float-right" to="/dashboard/portfolio/create">Create New</Link>}
-                        {(this.props.portfolioItem && this.state.auxImgs.length > 0 && this.state.longDesc && !this.state.isNew) && <Link className="btn btn-success btn-small float-right" style={{marginRight: "10px"}} target="_blank" to={`/portfolio/${this.props.portfolioItem.id}`}>View In Browser</Link>}
+                        {(this.props.portfolioItem && this.state.auxImgs.length > 0 && !this.state.isNew) && <Link className="btn btn-success btn-small float-right" style={{marginRight: "10px"}} target="_blank" to={`/portfolio/${this.props.portfolioItem.id}`}>View In Browser</Link>}
                         </h5>                        
                     </div>
                 </div>
@@ -546,6 +548,20 @@ class PortfolioEditForm extends React.Component {
                                                         </div>
                                                     );
                                                 })}
+                                                {this.state.auxImgs.length !== 0 && 
+                                                <div className="form-group text-white">
+                                                    <label htmlFor="aux-img-aspect-ratio">Slide Display Aspect Ratio (H/W): &nbsp;</label>            
+                                                    <input 
+                                                        type="text" 
+                                                        id="aux-img-aspect-ratio" 
+                                                        onChange={this.onTextChange}
+                                                        placeholder="64.3"
+                                                        style={{width: "50px"}}
+                                                        value={this.state.auxImgAspectRatio} 
+                                                    />
+                                                    <label>&nbsp; : 1</label>
+                                                </div>
+                                                }
                                             </div>
                                         </div>
                                         <div className="text-center">
