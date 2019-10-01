@@ -26,10 +26,6 @@ $m-size: 1.6rem;
 $l-size: 3.2rem;
 $xl-size: 4.8rem;
 // //
-// // media queries
-// //
-// $desktop-breakpoint: 45rem;
-// //
 // // backgrounds
 // //
 .bg-white {
@@ -41,11 +37,6 @@ $xl-size: 4.8rem;
     position: relative;
     width: 100%;
     float: left;
-}
-
-.home-page {
-    display: flex;
-    flex-direction: column;
 }
 
 label.btn {
@@ -145,16 +136,5 @@ body {
     transition: opacity 600ms linear;
     .hide-on-nav {
         visibility: hidden;
-    }
-}
-
-.home-section-title {
-    padding-top: 50px;
-    font-family: 'Didact Gothic', sans-serif;
-    font-size: 2.4rem;
-    padding-bottom: 20px;
-    border-bottom: 1px solid $gray-600;
-    @media screen and (min-width: $xs-breakpoint) {
-        font-size: 4rem;
     }
 }
