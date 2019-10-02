@@ -184,13 +184,16 @@ class SiteSettingsEditForm extends React.Component {
     // what happens when the user confirms deleting the slider image
     handleDelSliderImg = (e) => {
         e.preventDefault();
-        const sliderImgs = this.state.sliderImgs.filter((img) => {
-            return img.orientation = this.state.slideOrientation
+        const currSliderImgs = this.state.sliderImgs.filter((img) => {
+            return img.orientation === this.state.slideOrientation
         })
-        debugger
+
+        const otherSliderImgs = this.state.sliderImgs.filter((img) => {
+            return img.orientation !== this.state.slideOrientation
+        })
 
         const sliderImgIdx = e.target.getAttribute('data-idx');
-        const sliderImgToDelete = sliderImgs[sliderImgIdx].src;        
+        const sliderImgToDelete = currSliderImgs[sliderImgIdx].src;        
 
         if (sliderImgToDelete) {
             const imgNameRight = sliderImgToDelete.split('%2F').pop(); // everything after %2f
@@ -208,16 +211,19 @@ class SiteSettingsEditForm extends React.Component {
                 })
         }
 
+    
 
-        sliderImgs.splice(sliderImgIdx, 1)
+        currSliderImgs.splice(sliderImgIdx, 1);
+        const sliderImgs = [
+            ...currSliderImgs,
+            ...otherSliderImgs
+        ];
+
         this.setState({
             sliderImgs
         });
         this.doPostData();
-        setTimeout(() => {
-            this.doSuccessModal('Slider Image successfully removed');
-        }, 500)
-
+        this.closeMsgModal();
     }
 
 
