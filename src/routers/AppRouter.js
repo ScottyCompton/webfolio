@@ -11,6 +11,7 @@ import PublicRoute from './PublicRoute';
 import LoginPage from '../components/dashboard/LoginPage';
 import SiteSettingsPage from '../components/dashboard/SiteSettingsPage';
 import PortfolioItemDetailsPage from '../components/PortfolioItemDetailsPage';
+import Fibonacci from '../components/Fibonacci';
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 export const history = createBrowserHistory();
 
@@ -29,8 +30,9 @@ return (
         >
           <div>
             <Switch location={location}>
-              <PublicRoute path="/" component={HomePage} exact={true} />
-              <PublicRoute path="/portfolio/:id" component={PortfolioItemDetailsPage} />
+            <PublicRoute path="/" component={HomePage} exact={true} />
+            <PublicRoute path="/fibcalc" component={Fibonacci} exact={true} />
+            <PublicRoute path="/portfolio/:id" component={PortfolioItemDetailsPage} />
               <Route
                 path="/dashboard"
                 render={({ match: { url } }) => (
