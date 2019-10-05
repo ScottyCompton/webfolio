@@ -3,6 +3,9 @@
         const rho = 1.618034; // golden ratio
         const sqrtFive = 2.236068; // square root of 5
 
+        // golden ratio doesn't apply to n<2
+        if(n < 2) return n;
+
         const fibResult = Math.round((Math.pow(rho,n) - Math.pow((1-rho), n))/sqrtFive);
 
         // don't bother with tolerance or expected value if they don't exist

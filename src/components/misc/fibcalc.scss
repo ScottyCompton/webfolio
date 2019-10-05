@@ -1,0 +1,36 @@
+.fibBtns {
+    display: flex;
+    justify-content: space-evenly;
+    width: 42rem;
+    margin: 20px auto;
+    div.btnOr {
+        width: 47%;
+    }
+    div.lblOr {
+        width: 6%;
+        text-align: center;
+        color: #fff;
+    }
+    .btnLeft {
+        float: right;
+    }
+    .btnRight {
+        float: left;
+    }
+}
+
+.code-block {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f6f8fa;
+    border-radius: 4px;
+    color: #202020;
+    margin-bottom: 100px;
+}
+
+.fib-card {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 2rem;
+}

@@ -11,7 +11,7 @@ import PublicRoute from './PublicRoute';
 import LoginPage from '../components/dashboard/LoginPage';
 import SiteSettingsPage from '../components/dashboard/SiteSettingsPage';
 import PortfolioItemDetailsPage from '../components/PortfolioItemDetailsPage';
-import Fibonacci from '../components/Fibonacci';
+import Fibonacci from '../components/misc/Fibonacci';
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 export const history = createBrowserHistory();
 
