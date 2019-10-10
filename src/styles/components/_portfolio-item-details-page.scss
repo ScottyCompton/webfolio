@@ -3,6 +3,27 @@
     padding-bottom: 40px;
 }
 
+.Portfolio-Item__Bottom-Back-Btn {
+    display: none;
+    @media screen and (min-width: $sm-breakpoint) {
+        display: block;
+    }
+}
+
+.Portfolio-Item__Floating-Back-Btn {
+    display: block;
+    position: fixed;
+    z-index: 500;
+    right: 10px;
+    bottom: 20px;
+    a {
+        background: #000;
+    }
+    @media screen and (min-width: $sm-breakpoint) {
+        display: none;
+    }
+}
+
 .Portfolio-Item__Title {
     display: none;
     @media screen and (min-width: $md-breakpoint) {
@@ -14,6 +35,9 @@
 }
 
 .Portfolio-Item__Subtitle {
+    border-bottom: 1px solid $gray-600;
+    padding-bottom: 10px;
+    width: 100%;
     @media screen and (max-width: $xs-breakpoint) {
         font-size: 1.5rem;
     }
@@ -84,13 +108,13 @@
 }
 
 .Portfolio-Item__Summary {
-    padding: 3% 0px 0 3%;
+    padding: 3% 0 0 0;
     width: 100%;
     @media screen and (min-width: $xs-breakpoint) {
+        padding: 3% 0px 0 3%;
         width: 75%;
     }
     h6 {
-        font-size: 0.7rem;
         @media screen and (min-width: $md-breakpoint) {
             font-size: 0.875rem;
         }
@@ -140,8 +164,7 @@
 }
 
 .section-content {
-    padding-bottom: 40px;
-    font-size: 0.8rem;
+    padding: 20px 0;
     @media screen and (min-width: $xs-breakpoint) {
         font-size: inherit;
     }

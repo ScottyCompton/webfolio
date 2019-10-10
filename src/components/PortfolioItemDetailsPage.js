@@ -111,6 +111,9 @@ class PortfolioItemDetailsPage extends React.Component {
                     <div className="row">
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div className="Portfolio-Item__Container">
+                                <div className="Portfolio-Item__Floating-Back-Btn">
+                                    <Link className="btn btn-outline-warning" onClick={this.handleReturn} to="/">&lt; Back</Link>
+                                </div>
                                 <div className="Portfolio-Item__Head">
                                     <div className="Portfolio-Item__Logo">
                                         <img src="/images/nothing.png" />
@@ -204,7 +207,7 @@ class PortfolioItemDetailsPage extends React.Component {
                         </div>
                     </div>
 
-                    <div className="row">
+                    <div className="row Portfolio-Item__Bottom-Back-Btn">
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                             <Link className="btn btn-outline-warning" onClick={this.handleReturn} to="/">Back To Porfolio</Link>
                         </div>

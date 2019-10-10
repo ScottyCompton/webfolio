@@ -35,8 +35,7 @@ class PortCatRails extends React.Component {
                     <div className="row">
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <h1 className="text-primary home-section-title">My Past Works</h1>
-                            <p className="text-white d-block d-sm-none">Swipe to navigate galleries / click to view details</p>
-                            <p>&nbsp;</p>
+                            <p className="text-white d-block d-sm-none text-center">Swipe to navigate galleries / click to view details</p>
                         </div>
                     </div>
                     <div className="row">
