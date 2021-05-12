@@ -5,6 +5,9 @@
     "homepage": "http://scottlonis.com",
     "author": "Scott C. Lonis",
     "license": "MIT",
+    "engines": {
+        "node": "14.x"
+    },
     "scripts": {
         "start": "node server/server.js",
         "build:dev": "webpack",
