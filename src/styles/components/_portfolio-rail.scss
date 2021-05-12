@@ -3,7 +3,8 @@
     width: 99%;
     padding-bottom: 25px;
     @media screen and (min-width: $sm-breakpoint) {
-        width: 100%;
+        width: 98%;
+        margin-left: 1%;
         padding-bottom: 50px;
     }
     @media screen and (min-width: $lg-breakpoint) {

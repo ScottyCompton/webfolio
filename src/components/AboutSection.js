@@ -12,7 +12,7 @@ const AboutSection = (props) => {
         <div classname="hide-on-nav">
                 <div className="container-fluid">
                     <div className="row">
-                        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div className="are-you-hiring text-center hide-on-nav">
                                 <div><b>Are you hiring? </b> Because I'm looking.  <a href={resumeUrl} target="_blank">Click here to download a copy of my resume.</a></div>
                             </div>
@@ -21,7 +21,7 @@ const AboutSection = (props) => {
                 </div>
                 <div className="container">
                     <div className="about-section">
-                        <div className="row">
+                        <div className="row section-bkg">
                             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <h1 className="text-primary home-section-title">{aboutTitle}</h1>                
                             </div>

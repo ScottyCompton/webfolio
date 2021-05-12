@@ -110,7 +110,7 @@ class PortfolioItemDetailsPage extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div className="Portfolio-Item__Container">
+                            <div className="Portfolio-Item__Container section-bkg">
                                 <div className="Portfolio-Item__Floating-Back-Btn">
                                     <Link className="btn btn-outline-warning" onClick={this.handleReturn} to="/">&lt; Back</Link>
                                 </div>
