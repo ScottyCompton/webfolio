@@ -1,5 +1,5 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -13,7 +13,7 @@ if(process.env.NODE_ENV === 'test') {
 
 module.exports = (env) => {
     const isProduction = env==='production';
-    const CSSExtract = new ExtractTextPlugin('styles.css');
+    const CSSExtract = new MiniCssExtractPlugin('styles.css');
 
     return {
         entry: ['babel-polyfill', './src/app.js'],
@@ -22,33 +22,37 @@ module.exports = (env) => {
             filename: 'bundle.js'
         },
         module: {
-            rules: [{
-                loader: 'babel-loader',
-                test: /\.js$/,
-                exclude: /node_modules/
-            }, 
-            {
-                test: /\.s?css$/,
-                use: CSSExtract.extract({
+            rules: [
+                {
+                    loader: 'babel-loader',
+                    test: /\.js$/,
+                    exclude: /node_modules/
+                }, 
+                // {
+                //     test: /\.scss$/,
+                //     use: [MiniCssExtractPlugin.loader, 'sass-loader']
+                // },
+                // {
+                //     test: /\.css$/,
+                //     use: [MiniCssExtractPlugin.loader, 'css-loader']
+                // },
+                
+                {
+                    test: /\.(css|scss)$/,
                     use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                sourceMap: true
-                            }
-                        },
-                        {
-                            loader: 'sass-loader',
-                            options: {
-                                sourceMap:true
-                            }
-                        }
-                    ]
-                })
-            }]
+                      // Creates `style` nodes from JS strings
+                      'style-loader',
+                      // Translates CSS into CommonJS
+                      'css-loader',
+                      // Compiles Sass to CSS
+                      'sass-loader',
+                    ],
+                  }    
+                  
+            ]
         },
         plugins: [
-           CSSExtract,
+            new MiniCssExtractPlugin,
            new webpack.DefinePlugin({
             'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
             'process.env.FIREBASE_AUTH_DOMAIN': JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
